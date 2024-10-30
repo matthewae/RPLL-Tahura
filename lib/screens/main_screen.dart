@@ -62,7 +62,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                     ),
                     const SizedBox(height: 10),
                     const Text(
-                      'Explore Nature & Culture',
+                      'Explore Nature & Cultures',
                       style: TextStyle(
                         fontSize: 22,
                         color: Colors.white,
