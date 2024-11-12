@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/screens/cashpay_screen.dart';
+import 'package:myapp/screens/epay_screen.dart';
 import 'package:myapp/screens/main_screen.dart';
 import 'package:myapp/screens/profile_screen.dart';
 // import 'package:myapp/screens/awal_screen.dart';
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MpembayaranScreen(), // Use ProfilePage here
+      home: const EpayScreen(), // Use ProfilePage here
     );
   }
 }
