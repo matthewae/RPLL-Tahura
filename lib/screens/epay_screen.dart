@@ -49,7 +49,7 @@ class EpayScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5), // Add space between the lines
                   const Text(
-                    '(yang menggunakan qris/e-money)', // Update text here
+                    '(Menggunakan qris/e-money)', // Update text here
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,

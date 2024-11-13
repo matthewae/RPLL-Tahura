@@ -49,7 +49,7 @@ class CashpayScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 5), // Add space between the lines
                   const Text(
-                    '(yang menggunakan cash)',
+                    '(Menggunakan cash)',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
