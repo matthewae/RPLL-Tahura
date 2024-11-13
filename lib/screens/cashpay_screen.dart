@@ -20,7 +20,7 @@ class CashpayScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white, // Background white
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromARGB(223, 59, 173, 44),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),

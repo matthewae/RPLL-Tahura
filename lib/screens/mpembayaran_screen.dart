@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'cashpay_screen.dart'; 
+import 'epay_screen.dart';   
 
 class MpembayaranScreen extends StatefulWidget {
   const MpembayaranScreen({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class _MpembayaranScreenState extends State<MpembayaranScreen> {
     return Scaffold(
       backgroundColor: Colors.white, // Set background to white
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromARGB(223, 59, 173, 44),
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.only(left: 10.0),
@@ -75,12 +77,17 @@ class _MpembayaranScreenState extends State<MpembayaranScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 60.0),
             child: ElevatedButton(
               onPressed: () {
-                // Add confirmation action here
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Pembayaran dengan $_selectedPaymentMethod dipilih'),
-                  ),
-                );
+                if (_selectedPaymentMethod == "Cash") {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CashpayScreen()),
+                  );
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EpayScreen()),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.lightBlue[100],
