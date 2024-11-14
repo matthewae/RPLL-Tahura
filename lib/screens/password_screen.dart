@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'signin_screen.dart';
 import 'forgotpws_screen.dart';
-import 'mainmenu_screen.dart'; // Pastikan ini sudah diimport
+import 'mainmenu_screen.dart';
+import 'adminlogin_screen.dart'; // Tambahkan ini
 
 class PasswordScreen extends StatelessWidget {
   PasswordScreen({super.key});
@@ -30,7 +31,14 @@ class PasswordScreen extends StatelessWidget {
   void _navigateToMainMenu(BuildContext context) {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) =>  MainmenuScreen()),
+      MaterialPageRoute(builder: (context) => MainmenuScreen()),
+    );
+  }
+
+  void _navigateToAdminLogin(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AdminloginScreen()), // Halaman Admin
     );
   }
 
@@ -168,7 +176,7 @@ class PasswordScreen extends StatelessWidget {
                         ],
                       ),
                       child: ElevatedButton(
-                        onPressed: () => _navigateToMainMenu(context), // Navigasi ke MainMenuScreen
+                        onPressed: () => _navigateToMainMenu(context),
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14.0),
                           backgroundColor: Colors.transparent,
@@ -193,6 +201,17 @@ class PasswordScreen extends StatelessWidget {
                     onPressed: () => _register(context),
                     child: const Text(
                       'Register',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8.0), // Tambahan jarak untuk tombol "Admin"
+                  TextButton(
+                    onPressed: () => _navigateToAdminLogin(context),
+                    child: const Text(
+                      'Admin',
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
