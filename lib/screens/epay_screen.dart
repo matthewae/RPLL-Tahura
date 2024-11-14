@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'mainmenu_screen.dart'; // Import MainMenuScreen
 
 class EpayScreen extends StatelessWidget {
   const EpayScreen({Key? key}) : super(key: key);
@@ -7,7 +8,7 @@ class EpayScreen extends StatelessWidget {
   // Function to generate a random code for the bike pickup
   String generateRandomCode() {
     final random = Random();
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const characters = '0123456789';
     return 'SBSE' +
         List.generate(
             6, (index) => characters[random.nextInt(characters.length)]).join();
@@ -36,7 +37,6 @@ class EpayScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center, // Center content vertically
             crossAxisAlignment: CrossAxisAlignment.center, // Center content horizontally
             children: [
-              // Title with pyramid style
               Column(
                 children: [
                   const Text(
@@ -47,9 +47,9 @@ class EpayScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 5), // Add space between the lines
+                  const SizedBox(height: 5),
                   const Text(
-                    '(Menggunakan qris/e-money)', // Update text here
+                    '(Menggunakan qris/e-money)',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.normal,
@@ -60,18 +60,17 @@ class EpayScreen extends StatelessWidget {
               ),
               const SizedBox(height: 20),
 
-              // Alert box
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.green[100], // Green alert box
+                  color: Colors.green[100],
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'ALERT',
+                      'ALERT!',
                       style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
@@ -84,7 +83,6 @@ class EpayScreen extends StatelessWidget {
                       alignment: Alignment.centerRight,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Close alert action
                           Navigator.of(context).pop();
                         },
                         style: ElevatedButton.styleFrom(
@@ -102,7 +100,6 @@ class EpayScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
 
-              // Kode Pengambilan Sepeda (Generated)
               const Text(
                 'KODE PENGAMBILAN SEPEDA',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -115,20 +112,17 @@ class EpayScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  generatedCode, // Display the generated code
+                  generatedCode,
                   style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
-              const SizedBox(height: 40), // Add space before the button
+              const SizedBox(height: 40),
 
-              // Confirm Payment Button
               ElevatedButton(
                 onPressed: () {
-                  // Action for confirm payment button
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Pembayaran dengan QRIS/E-money dipilih'),
-                    ),
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  MainmenuScreen()), // Navigate to MainMenuScreen
                   );
                 },
                 style: ElevatedButton.styleFrom(

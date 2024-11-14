@@ -1,35 +1,36 @@
 import 'package:flutter/material.dart';
-import 'signin_screen.dart'; 
+import 'signin_screen.dart';
+import 'forgotpws_screen.dart';
+import 'mainmenu_screen.dart'; // Pastikan ini sudah diimport
 
-class PasswordScreen extends StatefulWidget {
-  const PasswordScreen({super.key});
+class PasswordScreen extends StatelessWidget {
+  PasswordScreen({super.key});
 
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<PasswordScreen> {
-  bool _obscureText = true;
-  bool _rememberMe = false; // Checkbox state
+  final ValueNotifier<bool> _obscureText = ValueNotifier<bool>(true);
+  final ValueNotifier<bool> _rememberMe = ValueNotifier<bool>(false);
 
   void _togglePasswordVisibility() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
+    _obscureText.value = !_obscureText.value;
   }
 
-  void _forgotPassword() {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Forgot Password clicked'),
-      ),
+  void _forgotPassword(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ForgotpwsScreen()),
     );
   }
 
-  void _register() {
+  void _register(BuildContext context) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => const SigninScreen()),
+    );
+  }
+
+  void _navigateToMainMenu(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) =>  MainmenuScreen()),
     );
   }
 
@@ -83,42 +84,49 @@ class _LoginPageState extends State<PasswordScreen> {
                     ),
                   ),
                   const SizedBox(height: 16.0),
-                  TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      hintStyle: const TextStyle(color: Colors.black54),
-                      filled: true,
-                      fillColor: Colors.white,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16.0),
-                        borderSide: BorderSide.none,
-                      ),
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 16.0, horizontal: 16.0),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscureText
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: Colors.black54,
+                  ValueListenableBuilder<bool>(
+                    valueListenable: _obscureText,
+                    builder: (context, obscureText, child) {
+                      return TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Password',
+                          hintStyle: const TextStyle(color: Colors.black54),
+                          filled: true,
+                          fillColor: Colors.white,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16.0),
+                            borderSide: BorderSide.none,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                              vertical: 16.0, horizontal: 16.0),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              obscureText
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.black54,
+                            ),
+                            onPressed: _togglePasswordVisibility,
+                          ),
                         ),
-                        onPressed: _togglePasswordVisibility,
-                      ),
-                    ),
-                    obscureText: _obscureText,
+                        obscureText: obscureText,
+                      );
+                    },
                   ),
                   const SizedBox(height: 16.0),
-                  // Centered Remember Me Checkbox
                   Row(
                     children: [
-                      Checkbox(
-                        value: _rememberMe,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            _rememberMe = value ?? false;
-                          });
+                      ValueListenableBuilder<bool>(
+                        valueListenable: _rememberMe,
+                        builder: (context, rememberMe, child) {
+                          return Checkbox(
+                            value: rememberMe,
+                            onChanged: (bool? value) {
+                              _rememberMe.value = value ?? false;
+                            },
+                            activeColor: Colors.green,
+                          );
                         },
-                        activeColor: Colors.green, // Checkbox color
                       ),
                       const Text(
                         'Remember Me',
@@ -127,11 +135,10 @@ class _LoginPageState extends State<PasswordScreen> {
                     ],
                   ),
                   const SizedBox(height: 8.0),
-                  // Forgot Password Text
                   Align(
                     alignment: Alignment.centerLeft,
                     child: TextButton(
-                      onPressed: _forgotPassword,
+                      onPressed: () => _forgotPassword(context),
                       child: const Text(
                         'Forgot Password?',
                         style: TextStyle(
@@ -161,7 +168,7 @@ class _LoginPageState extends State<PasswordScreen> {
                         ],
                       ),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => _navigateToMainMenu(context), // Navigasi ke MainMenuScreen
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14.0),
                           backgroundColor: Colors.transparent,
@@ -183,7 +190,7 @@ class _LoginPageState extends State<PasswordScreen> {
                   ),
                   const SizedBox(height: 16.0),
                   TextButton(
-                    onPressed: _register,
+                    onPressed: () => _register(context),
                     child: const Text(
                       'Register',
                       style: TextStyle(
@@ -201,11 +208,11 @@ class _LoginPageState extends State<PasswordScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/tahura3.png', height: 40.0), // Logo 1
+                Image.asset('assets/tahura3.png', height: 40.0),
                 const SizedBox(width: 20.0),
-                Image.asset('assets/likmidn.png', height: 40.0), // Logo 2
+                Image.asset('assets/likmidn.png', height: 40.0),
                 const SizedBox(width: 20.0),
-                Image.asset('assets/turisbg.png', height: 40.0), // Logo 3
+                Image.asset('assets/turisbg.png', height: 40.0),
               ],
             ),
           ),

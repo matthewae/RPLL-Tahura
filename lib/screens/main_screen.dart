@@ -98,7 +98,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const PasswordScreen()),
+                            MaterialPageRoute(builder: (context) =>  PasswordScreen()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'password_screen.dart'; // Import PasswordScreen
 
 void main() {
   runApp(const MyApp());
@@ -52,12 +53,10 @@ class _SigninPageState extends State<SigninScreen> {
         ),
       );
     } else {
-      // Proceed with login logic if passwords match
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Login Successful!'),
-          backgroundColor: Colors.green,
-        ),
+      // Navigasi ke PasswordScreen jika password cocok
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PasswordScreen()),
       );
     }
   }
@@ -169,7 +168,7 @@ class _SigninPageState extends State<SigninScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                          colors: [Colors.green, Colors.teal],
+                          colors: [Color.fromARGB(255, 129, 196, 131), Colors.teal],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
