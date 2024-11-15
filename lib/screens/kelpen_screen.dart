@@ -13,6 +13,7 @@ class _KelpenScreenState extends State<KelpenScreen> {
     {'username': 'Alex', 'email': 'alex@example.com', 'password': '********'},
     {'username': 'Bob', 'email': 'bob@example.com', 'password': '********'},
     {'username': 'Charlie', 'email': 'charlie@example.com', 'password': '********'},
+    {'username': 'Kenzie', 'email': 'kentot@example.com', 'password': '********'},
   ];
 
   List<Map<String, String>> filteredPengunjungData = [];

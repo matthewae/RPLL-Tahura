@@ -8,7 +8,7 @@ class AddinfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green[300],
+        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
         elevation: 0,
         title: const Text(
           'Detail Kelola Informasi',
@@ -19,7 +19,7 @@ class AddinfoScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      backgroundColor: Colors.green[300],
+      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
