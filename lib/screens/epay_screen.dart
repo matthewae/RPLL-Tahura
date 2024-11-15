@@ -86,7 +86,7 @@ class EpayScreen extends StatelessWidget {
                           Navigator.of(context).pop();
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.green,
+                          backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                         ),
                         child: const Text(

@@ -7,7 +7,7 @@ class AdminloginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[300], // Latar belakang hijau
+      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000), // Latar belakang hijau
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,

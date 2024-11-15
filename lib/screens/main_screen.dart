@@ -39,11 +39,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF66BB6A), Color(0xFF388E3C)], // Light to dark green gradient
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+          color: Color.fromRGBO(129, 212, 105, 1.000), // New background color
         ),
         child: FadeTransition(
           opacity: _fadeInAnimation,
@@ -98,7 +94,7 @@ class _MainScreenState extends State<MainScreen> with SingleTickerProviderStateM
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) =>  PasswordScreen()),
+                            MaterialPageRoute(builder: (context) => PasswordScreen()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

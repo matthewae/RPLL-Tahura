@@ -18,7 +18,7 @@ class ForgotpwsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[300],
+      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,

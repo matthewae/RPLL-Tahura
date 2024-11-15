@@ -3,6 +3,8 @@ import 'package:myapp/screens/cashpay_screen.dart';
 import 'package:myapp/screens/detailrebi_screen.dart';
 import 'package:myapp/screens/CHrebi_screen.dart';
 import 'package:myapp/screens/epay_screen.dart';
+import 'package:myapp/screens/fauna_screen.dart';
+import 'package:myapp/screens/flora_screen.dart';
 import 'package:myapp/screens/forgotpws_screen.dart';
 import 'package:myapp/screens/main_screen.dart';
 import 'package:myapp/screens/profile_screen.dart';
@@ -12,6 +14,7 @@ import 'package:myapp/screens/exitnotif_screen.dart';
 import 'package:myapp/screens/mpembayaran_screen.dart';
 import 'package:myapp/screens/detailrebi_screen.dart';
 import 'package:myapp/screens/mainmenu_screen.dart';
+import 'package:myapp/screens/spot_screen.dart';
 
 
 void main() {

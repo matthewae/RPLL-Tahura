@@ -47,7 +47,7 @@ class _DetailrebiScreenState extends State<DetailrebiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(223, 59, 173, 44),
+        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.black),

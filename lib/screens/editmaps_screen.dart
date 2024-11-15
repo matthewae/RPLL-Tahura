@@ -6,7 +6,7 @@ class EditmapsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[300], // Warna latar belakang hijau
+      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000), // Warna latar belakang hijau
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
