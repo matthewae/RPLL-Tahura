@@ -7,6 +7,8 @@ import 'adminlogin_screen.dart'; // Tambahkan ini
 class PasswordScreen extends StatelessWidget {
   PasswordScreen({super.key});
 
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
   final ValueNotifier<bool> _obscureText = ValueNotifier<bool>(true);
   final ValueNotifier<bool> _rememberMe = ValueNotifier<bool>(false);
 
@@ -29,6 +31,39 @@ class PasswordScreen extends StatelessWidget {
   }
 
   void _navigateToMainMenu(BuildContext context) {
+    String email = emailController.text.trim();
+    String password = passwordController.text.trim();
+
+    if (email.isEmpty || password.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Email dan Password tidak boleh kosong')),
+      );
+      return;
+    }
+
+    // Placeholder for database validation
+    // Uncomment and implement this logic when database is ready
+    /*
+    try {
+      bool isValidUser = await DatabaseService.validateUser(email, password);
+      if (isValidUser) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => MainmenuScreen()),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Invalid email or password')),
+        );
+      }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error validating user: $e')),
+      );
+    }
+    */
+
+    // Temporary navigation for testing
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => MainmenuScreen()),
@@ -78,6 +113,7 @@ class PasswordScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextField(
+                    controller: emailController,
                     decoration: InputDecoration(
                       hintText: 'Email',
                       hintStyle: const TextStyle(color: Colors.black54),
@@ -96,6 +132,7 @@ class PasswordScreen extends StatelessWidget {
                     valueListenable: _obscureText,
                     builder: (context, obscureText, child) {
                       return TextField(
+                        controller: passwordController,
                         decoration: InputDecoration(
                           hintText: 'Password',
                           hintStyle: const TextStyle(color: Colors.black54),
@@ -207,7 +244,7 @@ class PasswordScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8.0), // Tambahan jarak untuk tombol "Admin"
+                  const SizedBox(height: 8.0),
                   TextButton(
                     onPressed: () => _navigateToAdminLogin(context),
                     child: const Text(

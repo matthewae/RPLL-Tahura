@@ -3,7 +3,7 @@ import 'flora_screen.dart';
 import 'fauna_screen.dart';
 import 'spot_screen.dart';
 import 'map_screen.dart';
-import 'sepeda_screen.dart'; // Import SepedaScreen
+import 'sepeda_screen.dart'; 
 
 void main() {
   runApp(TahuraApp());
@@ -27,9 +27,9 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    Container(), // Placeholder for Info page content
-    MapScreen(), // Displays MapScreen when "Map" is selected
-    SepedaScreen(), // Displays SepedaScreen when "ReBi" is selected
+    Container(), 
+    MapScreen(), 
+    SepedaScreen(), 
   ];
 
   @override

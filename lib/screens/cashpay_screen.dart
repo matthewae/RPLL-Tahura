@@ -16,7 +16,7 @@ class CashpayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String generatedCode = generateRandomCode(); // Generate the code
+    String generatedCode = generateRandomCode(); 
 
     return Scaffold(
       backgroundColor: Colors.white, // Background white

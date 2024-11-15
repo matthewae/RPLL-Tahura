@@ -16,10 +16,10 @@ class EpayScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String generatedCode = generateRandomCode(); // Generate the code
+    String generatedCode = generateRandomCode(); 
 
     return Scaffold(
-      backgroundColor: Colors.white, // Background white
+      backgroundColor: Colors.white, 
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(223, 59, 173, 44),
         elevation: 0,
@@ -34,8 +34,8 @@ class EpayScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Center content vertically
-            crossAxisAlignment: CrossAxisAlignment.center, // Center content horizontally
+            mainAxisAlignment: MainAxisAlignment.center, 
+            crossAxisAlignment: CrossAxisAlignment.center, 
             children: [
               Column(
                 children: [

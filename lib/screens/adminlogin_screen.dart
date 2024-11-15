@@ -6,6 +6,49 @@ class AdminloginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController idController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
+
+    void _validateAndLogin() {
+      String employeeId = idController.text.trim();
+      String password = passwordController.text.trim();
+
+      if (employeeId.isEmpty || password.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('ID Karyawan dan Password tidak boleh kosong')),
+        );
+        return;
+      }
+
+      // Placeholder for database validation
+      // Uncomment and implement this logic when database is ready
+      /*
+      try {
+        bool isValidAdmin = await DatabaseService.validateAdmin(employeeId, password);
+        if (isValidAdmin) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MmpengelolaScreen()),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('ID Karyawan atau Password salah')),
+          );
+        }
+      } catch (e) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error during login: $e')),
+        );
+      }
+      */
+
+      // Temporary navigation for testing
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => MmpengelolaScreen()),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Color.fromRGBO(129, 212, 105, 1.000), // Latar belakang hijau
       appBar: AppBar(
@@ -32,6 +75,7 @@ class AdminloginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              controller: idController,
               decoration: InputDecoration(
                 hintText: 'ID Karyawan',
                 hintStyle: const TextStyle(color: Colors.black54),
@@ -47,6 +91,7 @@ class AdminloginScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             TextField(
+              controller: passwordController,
               decoration: InputDecoration(
                 hintText: 'Password',
                 hintStyle: const TextStyle(color: Colors.black54),
@@ -65,14 +110,7 @@ class AdminloginScreen extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () {
-                  // Navigasi ke MMPengelolaScreen
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => MmpengelolaScreen()),
-                  );
-                },
+                onPressed: _validateAndLogin,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, // Warna tombol sesuai gambar
                   shape: RoundedRectangleBorder(
