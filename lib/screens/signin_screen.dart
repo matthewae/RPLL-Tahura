@@ -31,6 +31,7 @@ class _SigninPageState extends State<SigninScreen> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmPasswordController =
       TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -44,33 +45,76 @@ class _SigninPageState extends State<SigninScreen> {
     });
   }
 
-  void _login() {
-    if (_passwordController.text != _confirmPasswordController.text) {
+  void _signIn() {
+    String email = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+    String confirmPassword = _confirmPasswordController.text.trim();
+
+    // Validation
+    if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Password does not match. Please try again.'),
+          content: Text('Please fill in all fields'),
           backgroundColor: Colors.red,
         ),
       );
-    } else {
-      // Navigasi ke PasswordScreen jika password cocok
+      return;
+    }
+
+    if (password != confirmPassword) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Passwords do not match. Please try again.'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    // Placeholder for sending data to the database
+    // Uncomment and implement this logic when the database is ready
+    /*
+    try {
+      await DatabaseService.createUser(email: email, password: password);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Account created successfully!'),
+          backgroundColor: Colors.green,
+        ),
+      );
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => PasswordScreen()),
       );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error creating account: $e'),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
+    */
+
+    // Temporary navigation for testing
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => PasswordScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(129,212,105,1.000),
+      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context); // Navigate to the previous screen
+          },
         ),
         actions: const [
           Padding(
@@ -97,6 +141,7 @@ class _SigninPageState extends State<SigninScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   TextField(
+                    controller: _emailController,
                     decoration: InputDecoration(
                       hintText: 'Email',
                       hintStyle: const TextStyle(color: Colors.black54),
@@ -182,7 +227,7 @@ class _SigninPageState extends State<SigninScreen> {
                         ],
                       ),
                       child: ElevatedButton(
-                        onPressed: _login,
+                        onPressed: _signIn,
                         style: ElevatedButton.styleFrom(
                           padding: const EdgeInsets.symmetric(vertical: 14.0),
                           backgroundColor: Colors.transparent,
