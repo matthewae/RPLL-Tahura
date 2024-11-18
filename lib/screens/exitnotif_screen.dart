@@ -1,28 +1,41 @@
 import 'package:flutter/material.dart';
+import 'password_screen.dart'; // Import PasswordScreen
+import 'profile_screen.dart'; // Import ProfileScreen
 
 class ExitnotifScreen extends StatelessWidget {
   const ExitnotifScreen({Key? key}) : super(key: key);
 
-  void _logout(BuildContext context) {
-    Navigator.pushReplacementNamed(context, '/login'); // Navigate to login page
+  void _navigateToPasswordScreen(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => PasswordScreen()),
+    );
+  }
+
+  void _navigateToProfileScreen(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => ProfileScreen()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('Logout Confirmation'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
-        title: const Text('Profile'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Profile Picture Section
             CircleAvatar(
               radius: 50,
               backgroundImage: NetworkImage(
@@ -30,15 +43,16 @@ class ExitnotifScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
+            // Logout Confirmation Dialog
             Container(
               width: 300,
-              height: 100,
+              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
-                color: Colors.green[200], // Set a darker green color
+                color: Colors.green[200],
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text(
                     'Reminder',
@@ -51,25 +65,22 @@ class ExitnotifScreen extends StatelessWidget {
                   const SizedBox(height: 10),
                   const Text(
                     'Are you sure you want to logout?',
+                    textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16, color: Colors.black),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 20),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop(); // Close notification box
-                        },
+                        onPressed: () => _navigateToProfileScreen(context),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey,
                         ),
                         child: const Text('No'),
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          _logout(context); // Directly logout
-                        },
+                        onPressed: () => _navigateToPasswordScreen(context),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red,
                         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'exitnotif_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -101,18 +102,28 @@ class ProfileScreen extends StatelessWidget {
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/login');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ExitnotifScreen(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.red,
-                    padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 100, vertical: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: const Text(
                     'Logout',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black, // Ubah warna teks menjadi hitam
+                    ),
                   ),
                 ),
               ],

@@ -8,6 +8,7 @@ import 'package:myapp/screens/flora_screen.dart';
 import 'package:myapp/screens/forgotpws_screen.dart';
 import 'package:myapp/screens/main_screen.dart';
 import 'package:myapp/screens/profile_screen.dart';
+import 'package:myapp/screens/sepeda_screen.dart';
 import 'package:myapp/screens/signin_screen.dart';
 import 'package:myapp/screens/password_screen.dart';
 import 'package:myapp/screens/exitnotif_screen.dart';
