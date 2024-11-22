@@ -15,6 +15,7 @@ import 'package:myapp/screens/exitnotif_screen.dart';
 import 'package:myapp/screens/mpembayaran_screen.dart';
 import 'package:myapp/screens/detailrebi_screen.dart';
 import 'package:myapp/screens/mainmenu_screen.dart';
+import 'package:myapp/screens/splash_screen.dart';
 import 'package:myapp/screens/spot_screen.dart';
 
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  MainScreen(), 
+      home:  SplashScreen(), 
     );
   }
 }

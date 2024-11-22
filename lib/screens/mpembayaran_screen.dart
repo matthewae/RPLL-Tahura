@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'cashpay_screen.dart'; 
-import 'epay_screen.dart';   
+import 'cashpay_screen.dart';
+import 'epay_screen.dart';
+import 'profile_screen.dart'; // Import the ProfileScreen
 
 class MpembayaranScreen extends StatefulWidget {
-  const MpembayaranScreen({Key? key}) : super(key: key);
+  const MpembayaranScreen({super.key});
 
   @override
   _MpembayaranScreenState createState() => _MpembayaranScreenState();
@@ -17,15 +18,24 @@ class _MpembayaranScreenState extends State<MpembayaranScreen> {
     return Scaffold(
       backgroundColor: Colors.white, // Set background to white
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.only(left: 10.0),
-          child: CircleAvatar(
-            radius: 20,
-            backgroundImage: NetworkImage(
-              'https://images.unsplash.com/photo-1534528740805-52a86510e3f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHxlbnwwfHwyMDI2fDIwNjI2MA&auto=format&fit=crop&w=500&q=60',
+          child: IconButton(
+            icon: const CircleAvatar(
+              radius: 20,
+              backgroundImage: NetworkImage(
+                'https://images.unsplash.com/photo-1534528740805-52a86510e3f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHxlbnwwfHwyMDI2fDIwNjI2MA&auto=format&fit=crop&w=500&q=60',
+              ),
             ),
+            onPressed: () {
+              // Navigate to the ProfileScreen when the profile icon is clicked
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
           ),
         ),
       ),
@@ -80,12 +90,12 @@ class _MpembayaranScreenState extends State<MpembayaranScreen> {
                 if (_selectedPaymentMethod == "Cash") {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CashpayScreen()),
+                    MaterialPageRoute(builder: (context) => const CashpayScreen()),
                   );
                 } else {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EpayScreen()),
+                    MaterialPageRoute(builder: (context) => const EpayScreen()),
                   );
                 }
               },
