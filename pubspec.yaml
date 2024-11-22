@@ -22,6 +22,8 @@ dependencies:
     sdk: flutter
   flutter_map: ^4.0.0
   latlong2: ^0.8.1
+  # google_maps_flutter: ^2.2.0
+  # geolocator: ^9.0.2
   # firebase_core: ^2.17.0
   cloud_firestore: ^4.10.0
   firebase_database: ^10.5.7
@@ -52,6 +54,23 @@ flutter:
     - assets/tahura2.webp
     - assets/likmi2.webp
     - assets/tahura3.png
+    - assets/anggrek.jpg
+    - assets/ayam.jpg
+    - assets/batik.jpg
+    - assets/belanda.jpg
+    - assets/burung.jpg
+    - assets/Curugdago4.jpg
+    - assets/jepang.jpg
+    - assets/kepodang.jpg
+    - assets/kutilang.jpg
+    - assets/monyet.jpg
+    - assets/museum.jpg
+    - assets/omas.jpg
+    - assets/pinus.jpg
+    - assets/rusa.jpg
+    - assets/sambar.jpg
+    - assets/teklan.jpg
+    - assets/titan.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:
