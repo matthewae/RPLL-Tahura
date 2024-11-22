@@ -9,14 +9,14 @@ class MapScreen extends StatelessWidget {
   List<Marker> _addMarkers() {
     // Daftar spot di Tahura
     final spots = [
-      {"title": "Pintu Masuk Utama Tahura", "position": LatLng(-6.8585, 107.6191)},
-      {"title": "Curug Omas", "position": LatLng(-6.8354, 107.6285)},
-      {"title": "Goa Jepang", "position": LatLng(-6.8593, 107.6185)},
-      {"title": "Goa Belanda", "position": LatLng(-6.8600, 107.6170)},
+      {"title": "Pintu Masuk Utama Tahura", "position": LatLng(-6.858293, 107.630616)},
+      {"title": "Curug Omas", "position": LatLng(-6.8350332,107.6581357)},
+      {"title": "Goa Jepang", "position": LatLng(-6.856518, 107.632865)},
+      {"title": "Goa Belanda", "position": LatLng(-6.854471, 107.637774)},
       {"title": "Jembatan Gantung", "position": LatLng(-6.8390, 107.6225)},
-      {"title": "Monumen Ir. H. Djuanda", "position": LatLng(-6.8576, 107.6201)},
-      {"title": "Curug Lalay", "position": LatLng(-6.8375, 107.6275)},
-      {"title": "Bukit Pakar", "position": LatLng(-6.8540, 107.6150)},
+      {"title": "Monumen Ir. H. Djuanda", "position": LatLng(-6.857481, 107.629433)},
+      {"title": "Batu Hoe", "position": LatLng(-6.839175,107.647933)},
+      {"title": "Batu Batik", "position": LatLng(-6.8422229,107.6482683)},
     ];
 
     // Menghasilkan list marker berdasarkan data spots
@@ -43,7 +43,7 @@ class MapScreen extends StatelessWidget {
       ),
       body: FlutterMap(
         options: MapOptions(
-          center: LatLng(-6.8540, 107.6150),
+          center: LatLng(-6.858293, 107.630616),
           zoom: 17.0,
           maxZoom: 18.0,
           minZoom: 16.0,
