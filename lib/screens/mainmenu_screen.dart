@@ -55,7 +55,7 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
                       padding: const EdgeInsets.only(bottom: 10.0),
                       child: Card(
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(100),
                           side: BorderSide(color: Colors.grey[300]!),
                         ),
                         child: ListTile(

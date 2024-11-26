@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'CHrebi_screen.dart'; // Pastikan Anda mengganti path ini dengan path yang benar
+import 'CHrebi_screen.dart'; // Replace this path with the correct one.
 
 void main() {
   runApp(MyApp());
@@ -21,26 +21,66 @@ class DetailrebiScreen extends StatefulWidget {
 }
 
 class _DetailrebiScreenState extends State<DetailrebiScreen> {
-  final jenisSepedaController = TextEditingController();
-  final jumlahJamSewaController = TextEditingController();
-  final pengambilanSepedaController = TextEditingController();
-  final pengembalianSepedaController = TextEditingController();
+  String? selectedJamSewa;
+  String? selectedPengambilanSepeda;
+  String? calculatedPengembalianSepeda;
   final totalPenyewaanController = TextEditingController();
 
   @override
   void dispose() {
-    jenisSepedaController.dispose();
-    jumlahJamSewaController.dispose();
-    pengambilanSepedaController.dispose();
-    pengembalianSepedaController.dispose();
     totalPenyewaanController.dispose();
     super.dispose();
   }
 
+  final List<String> jamSewaOptions = [
+    '1 Jam',
+    '2 Jam',
+    '3 Jam',
+  ];
+
+  final List<String> pengambilanTimes = [
+    '08:00',
+    '09:00',
+    '10:00',
+    '11:00',
+    '12:00',
+    '13:00',
+    '14:00',
+    '15:00',
+  ];
+
+  void calculatePengembalianSepeda() {
+    if (selectedJamSewa != null && selectedPengambilanSepeda != null) {
+      int jamSewa = int.parse(selectedJamSewa!.split(' ')[0]);
+      int startHour = int.parse(selectedPengambilanSepeda!.split(':')[0]);
+      int endHour = startHour + jamSewa;
+
+      // Ensure endHour doesn't exceed 24 (assuming simple logic here)
+      if (endHour <= 24) {
+        setState(() {
+          calculatedPengembalianSepeda =
+              '${endHour.toString().padLeft(2, '0')}:00';
+        });
+      } else {
+        setState(() {
+          calculatedPengembalianSepeda = 'Invalid Time';
+        });
+      }
+    }
+  }
+
   void calculateTotal() {
-    setState(() {
-      totalPenyewaanController.text = "Rp. 100000"; // Contoh hasil total penyewaan
-    });
+    if (selectedJamSewa != null) {
+      int jamSewa = int.parse(selectedJamSewa!.split(' ')[0]);
+      int totalHarga = jamSewa * 10000; // Harga per jam Rp 10.000
+      setState(() {
+        totalPenyewaanController.text = "Rp. ${totalHarga.toString()}";
+      });
+    } else {
+      setState(() {
+        totalPenyewaanController.text = "Pilih durasi sewa terlebih dahulu";
+      });
+    }
   }
 
   @override
@@ -62,7 +102,8 @@ class _DetailrebiScreenState extends State<DetailrebiScreen> {
           Padding(
             padding: const EdgeInsets.only(left: 15.0),
             child: CircleAvatar(
-              backgroundImage: AssetImage('assets/profile.jpg'), // Ganti dengan path foto profil
+              backgroundImage: AssetImage(
+                  'assets/profile.jpg'), // Replace with profile image path.
               radius: 20,
             ),
           ),
@@ -73,13 +114,32 @@ class _DetailrebiScreenState extends State<DetailrebiScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTextField("Jenis Sepeda :", jenisSepedaController),
+            _buildDropDown("Jumlah Jam Sewa :", jamSewaOptions, selectedJamSewa,
+                (value) {
+              setState(() {
+                selectedJamSewa = value;
+                calculatePengembalianSepeda();
+                calculateTotal(); // Update total secara otomatis
+              });
+            }),
+            SizedBox(height: 20),
+            _buildDropDown("Pengambilan Sepeda :", pengambilanTimes,
+                selectedPengambilanSepeda, (value) {
+              setState(() {
+                selectedPengambilanSepeda = value;
+                calculatePengembalianSepeda();
+              });
+            }),
             SizedBox(height: 14),
-            _buildTextField("Jumlah Jam Sewa :", jumlahJamSewaController, suffixText: "Jam"),
-            SizedBox(height: 14),
-            _buildTextField("Pengambilan Sepeda :", pengambilanSepedaController, suffixText: "Jam"),
-            SizedBox(height: 14),
-            _buildTextField("Pengembalian Sepeda :", pengembalianSepedaController, suffixText: "Jam"),
+            Text(
+              "Pengembalian Sepeda:",
+              style: TextStyle(fontSize: 14),
+            ),
+            Text(
+              calculatedPengembalianSepeda ??
+                  "Pilih waktu pengambilan dan durasi",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
             SizedBox(height: 14),
             Text(
               "Total Penyewaan Sepeda",
@@ -89,7 +149,6 @@ class _DetailrebiScreenState extends State<DetailrebiScreen> {
               controller: totalPenyewaanController,
               readOnly: true,
               decoration: InputDecoration(
-                prefixText: "Rp ",
                 border: OutlineInputBorder(),
               ),
             ),
@@ -98,10 +157,9 @@ class _DetailrebiScreenState extends State<DetailrebiScreen> {
               alignment: Alignment.centerRight,
               child: ElevatedButton(
                 onPressed: () {
-                  calculateTotal();  // Hitung total
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CHrebiScreen()), 
+                    MaterialPageRoute(builder: (context) => CHrebiScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -112,7 +170,8 @@ class _DetailrebiScreenState extends State<DetailrebiScreen> {
                 ),
                 child: Text(
                   "Check Out",
-                  style: TextStyle(color: Colors.black), // Mengubah warna teks menjadi hitam
+                  style: TextStyle(
+                      color: Colors.black), // Change text color to black.
                 ),
               ),
             ),
@@ -122,7 +181,8 @@ class _DetailrebiScreenState extends State<DetailrebiScreen> {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller, {String suffixText = ""}) {
+  Widget _buildDropDown(String label, List<String> options,
+      String? selectedValue, ValueChanged<String?> onChanged) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -130,13 +190,19 @@ class _DetailrebiScreenState extends State<DetailrebiScreen> {
           label,
           style: TextStyle(fontSize: 14),
         ),
-        TextField(
-          controller: controller,
+        DropdownButtonFormField<String>(
           decoration: InputDecoration(
-            suffixText: suffixText,
+            labelText: label,
             border: OutlineInputBorder(),
           ),
-          keyboardType: TextInputType.number,
+          value: selectedValue,
+          items: options.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Text(value),
+            );
+          }).toList(),
+          onChanged: onChanged,
         ),
       ],
     );

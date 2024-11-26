@@ -17,6 +17,7 @@ class MapScreen extends StatelessWidget {
       {"title": "Monumen Ir. H. Djuanda", "position": LatLng(-6.857481, 107.629433)},
       {"title": "Batu Hoe", "position": LatLng(-6.839175,107.647933)},
       {"title": "Batu Batik", "position": LatLng(-6.8422229,107.6482683)},
+      {"title": "Pintu Masuk Maribaya", "position": LatLng(-6.8311627,107.6509174)},
     ];
 
     // Menghasilkan list marker berdasarkan data spots
@@ -24,7 +25,7 @@ class MapScreen extends StatelessWidget {
       return Marker(
         width: 80.0,
         height: 80.0,
-        point: spot["position"] as LatLng, // Konversi eksplisit ke LatLng
+        point: spot["position"] as LatLng, 
         builder: (ctx) => Icon(
           Icons.location_pin,
           color: Colors.red, // Warna merah untuk marker

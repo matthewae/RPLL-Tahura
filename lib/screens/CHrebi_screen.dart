@@ -17,7 +17,6 @@ class MyApp extends StatelessWidget {
 
 class CHrebiScreen extends StatelessWidget {
   final namaPengunjungController = TextEditingController();
-  final jenisSepedaController = TextEditingController();
   final jumlahJamSewaController = TextEditingController();
   final jamPengambilanController = TextEditingController();
   final jamPengembalianController = TextEditingController();
@@ -53,8 +52,6 @@ class CHrebiScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildTextField("Nama Pengunjung :", namaPengunjungController),
-            SizedBox(height: 14),
-            _buildTextField("Jenis Sepeda :", jenisSepedaController),
             SizedBox(height: 14),
             _buildTextField("Jumlah Jam Sewa :", jumlahJamSewaController, suffixText: "Jam"),
             SizedBox(height: 14),

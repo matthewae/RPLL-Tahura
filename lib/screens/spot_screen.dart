@@ -71,6 +71,18 @@ class SpotScreen extends StatelessWidget {
                         description:
                             'Penangkaran Rusa adalah tempat yang didedikasikan untuk melindungi dan melestarikan spesies rusa yang terancam punah.',
                       ),
+                      const SizedBox(height: 16.0),
+                      SpotCard(
+                        title: 'Curug Omas',
+                        image: 'assets/omas.jpg',
+                        description: 'Curug Omas merupakan air terjun yang memiliki ketinggian mencapai 30 meter dengan kedalaman air mencapai 10 meter di Tahura Djuanda. Curug Omas merupakan sebuah titik pertemuan dari dua aliran sungai yaitu sungai Cikawari dan sungai Cigulun.',
+                      ),
+                      const SizedBox(height: 16.0),
+                      SpotCard(
+                        title: 'Batu Selendang Dayang',
+                        image: 'assets/batik.jpg',
+                        description: 'Batu mirip corak batik itu hanya berada di Indonesia dan teksturnya mirip batu di Hawaii. Pengelola Tahura Djuanda telah memperbaiki akses jalan menuju Batu Selendang Dayang Sumbi sehingga saat ini pengunjung dapat melakukan swafoto di akses jalan tersebut.',
+                      ),
                     ],
                   ),
                 ),
@@ -101,7 +113,7 @@ class SpotCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         border: Border.all(
-          color: Colors.black,
+          color: Colors.green,
           width: 1.0,
         ),
         color: const Color.fromRGBO(129, 212, 105, 1.000), // Green color for cards
@@ -113,7 +125,7 @@ class SpotCard extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(4.0),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
+                border: Border.all(color: Colors.green),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               child: Image.asset(

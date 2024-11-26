@@ -104,7 +104,7 @@ class FloraCard extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         border: Border.all(
-          color: Colors.black,
+          color: Colors.green,
           width: 1.0,
         ),
         color: const Color.fromRGBO(129, 212, 105, 1.000), // Green color for cards
@@ -116,7 +116,7 @@ class FloraCard extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.all(4.0),
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
+                border: Border.all(color: Colors.green),
                 borderRadius: BorderRadius.circular(12.0),
               ),
               child: Image.asset(
