@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
 import 'exitnotif_screen.dart';
+import '../database/database_instance.dart';
+import '../models/pengguna.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   // Simulasi pengambilan data dari database
-  Future<Map<String, String>> getUserData() async {
-    await Future.delayed(const Duration(seconds: 2));
-    return {
-      'username': 'UserNameFromDatabase',
-      'email': 'email@example.com',
-    };
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,8 +19,8 @@ class ProfileScreen extends StatelessWidget {
         ),
         title: const Text('Profile'),
       ),
-      body: FutureBuilder<Map<String, String>>(
-        future: getUserData(),
+      body: FutureBuilder<Pengguna?>(
+        future: DatabaseInstance.instance.getUserData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -40,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
             return const Center(child: Text('No data found.'));
           }
 
-          final userData = snapshot.data!;
+          final pengguna = snapshot.data!;
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -66,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      userData['username'] ?? 'Username',
+                      pengguna.username,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -90,7 +84,7 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      userData['email'] ?? 'Email@example.com',
+                      pengguna.email,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,

@@ -17,7 +17,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  firebase_core: ^2.32.0
+  # firebase_core: ^2.32.0
   flutter:
     sdk: flutter
   flutter_map: ^4.0.0
@@ -25,13 +25,21 @@ dependencies:
   # google_maps_flutter: ^2.2.0
   # geolocator: ^9.0.2
   # firebase_core: ^2.17.0
-  cloud_firestore: ^4.10.0
-  firebase_database: ^10.5.7
+  # cloud_firestore: ^4.10.0
+  # firebase_database: ^10.5.7
+  location: ^5.0.0
+  geolocator: ^10.0.1
+  # qr_flutter: ^4.1.0
+
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  sqflite: ^2.0.3
+  path_provider: ^2.0.0+4
   flutter_lints: ^4.0.0
+ 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -46,6 +54,7 @@ flutter:
 
   assets:
     - assets/tahura.jpeg
+    - assets/tahura.png
     - assets/turisbg.png
     - assets/tahura2.png
     - assets/likmi2.png

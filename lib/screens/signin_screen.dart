@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'password_screen.dart'; // Import PasswordScreen
+import 'password_screen.dart';
+import '../database/database_instance.dart';
+import '../models/pengguna.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,7 +47,7 @@ class _SigninPageState extends State<SigninScreen> {
     });
   }
 
-  void _signIn() {
+  void _signIn() async {
     String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
     String confirmPassword = _confirmPasswordController.text.trim();
@@ -71,14 +73,17 @@ class _SigninPageState extends State<SigninScreen> {
       return;
     }
 
-    // Placeholder for sending data to the database
-    // Uncomment and implement this logic when the database is ready
-    /*
     try {
-      await DatabaseService.createUser(email: email, password: password);
+      Pengguna penggunaBaru = Pengguna(
+        username: email.split('@')[0],
+        email: email,
+        password: password,
+      );
+
+      await DatabaseInstance.instance.insertPengguna(penggunaBaru);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Account created successfully!'),
+          content: Text('Akun Berhasil Dibuat!'),
           backgroundColor: Colors.green,
         ),
       );
@@ -89,18 +94,11 @@ class _SigninPageState extends State<SigninScreen> {
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Error creating account: $e'),
+          content: Text('Gagal Membuat Akun : $e'),
           backgroundColor: Colors.red,
         ),
       );
     }
-    */
-
-    // Temporary navigation for testing
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => PasswordScreen()),
-    );
   }
 
   @override
@@ -213,7 +211,10 @@ class _SigninPageState extends State<SigninScreen> {
                     child: Container(
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
-                          colors: [Color.fromARGB(255, 129, 196, 131), Colors.teal],
+                          colors: [
+                            Color.fromARGB(255, 129, 196, 131),
+                            Colors.teal
+                          ],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
