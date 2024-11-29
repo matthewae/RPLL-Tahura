@@ -66,35 +66,6 @@ class PasswordScreen extends StatelessWidget {
     }
   }
 
-    // Placeholder for database validation
-    // Uncomment and implement this logic when database is ready
-    /*
-    try {
-      bool isValidUser = await DatabaseService.validateUser(email, password);
-      if (isValidUser) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => MainmenuScreen()),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Invalid email or password')),
-        );
-      }
-    } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error validating user: $e')),
-      );
-    }
-    */
-
-    // Temporary navigation for testing
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(builder: (context) => MainmenuScreen()),
-    //   );
-    // }
-
     void _navigateToAdminLogin(BuildContext context) {
       Navigator.push(
         context,

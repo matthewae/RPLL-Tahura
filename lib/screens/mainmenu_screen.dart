@@ -23,27 +23,13 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
           Container(
             color: Colors.green, // Warna latar belakang
           ),
-          // Container(
-          //   decoration: BoxDecoration(
-          //     image: DecorationImage(
-          //       image: AssetImage(
-          //         'assets/tahura2.png',
-          //       ),
-          //       fit: BoxFit.contain,
-          //        colorFilter: ColorFilter.mode(
-          //         Colors.black.withOpacity(0.5), // Mengatur transparansi
-          //         BlendMode.darken, // Menggelapkan gambar
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Column(
             children: [
               AppBar(
                 backgroundColor: Colors.green,
                 elevation: 0,
                 leading: IconButton(
-                  icon: Icon(Icons.account_circle, color: Colors.black),
+                  icon: const Icon(Icons.account_circle, color: Colors.black),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -53,7 +39,7 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
                     );
                   },
                 ),
-                title: Center(
+                title: const Center(
                   child: Text(
                     'Information About Tahura',
                     style: TextStyle(
@@ -70,61 +56,117 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Column(
                           children: [
-                            SizedBox(height: 20),
+                            const SizedBox(height: 20),
                             for (var category in categories)
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 10.0),
                                 child: Card(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                    side: BorderSide(color: Colors.grey[300]!),
+                                    borderRadius: BorderRadius.circular(12),
                                   ),
-                                  child: ListTile(
-                                    title: Text(
-                                      category,
-                                      style: TextStyle(fontSize: 18),
-                                    ),
-                                    trailing: CircleAvatar(
-                                      radius: 18,
-                                      backgroundImage: NetworkImage(
-                                        'https://images.unsplash.com/photo-1534528740805-52a86510e3f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHxlbnwwfHwyMDI2fDIwNjI2MA&auto=format&fit=crop&w=500&q=60',
-                                      ),
-                                    ),
+                                  elevation: 3, // Tambahkan bayangan pada card
+                                  child: InkWell(
                                     onTap: () {
                                       if (category == 'Flora') {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => FloraScreen(),
+                                            builder: (context) =>
+                                                FloraScreen(),
                                           ),
                                         );
                                       } else if (category == 'Fauna') {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => FaunaScreen(),
+                                            builder: (context) =>
+                                                FaunaScreen(),
                                           ),
                                         );
                                       } else if (category == 'Spot') {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => SpotScreen(),
+                                            builder: (context) =>
+                                                SpotScreen(),
                                           ),
                                         );
                                       }
                                     },
+                                    child: Row(
+                                      children: [
+                                        // Bagian gambar/icon
+                                        Container(
+                                          height: 80,
+                                          width: 80,
+                                          decoration: BoxDecoration(
+                                            borderRadius: const BorderRadius
+                                                    .only(
+                                                topLeft: Radius.circular(12),
+                                                bottomLeft: Radius.circular(12),
+                                              ),
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                category == 'Flora'
+                                                    ? 'assets/pinus.jpg'
+                                                    : category == 'Fauna'
+                                                        ? 'assets/rusa.jpg'
+                                                        : 'assets/museum.jpg',
+                                              ),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                        // Bagian teks
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(16.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  category,
+                                                  style: const TextStyle(
+                                                    fontSize: 18,
+                                                    fontWeight: FontWeight.bold,
+                                                  ),
+                                                ),
+                                                const SizedBox(height: 8),
+                                                Text(
+                                                  category == 'Flora'
+                                                      ? 'Explore flora collection in Tahura.'
+                                                      : category == 'Fauna'
+                                                          ? 'Discover various fauna species.'
+                                                          : 'Find your favorite spot.',
+                                                  style: const TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.grey,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        // Ikon panah
+                                        const Padding(
+                                          padding: EdgeInsets.only(right: 8.0),
+                                          child: Icon(Icons.arrow_forward_ios,
+                                              size: 16),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            Spacer(),
+                            const Spacer(),
                           ],
                         ),
                       )
                     : _selectedIndex == 1
                         ? MapScreen() // Halaman Map tetap
-                        : SepedaScreen(),
-               ), // Ganti ReBi dengan SepedaScreen ),
+                        : SepedaScreen(), // Halaman Sepeda
+              ),
               BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
                 backgroundColor: Colors.white,
@@ -158,4 +200,4 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
       ),
     );
   }
-} 
+}

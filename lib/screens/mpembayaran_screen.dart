@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'cashpay_screen.dart';
-import 'epay_screen.dart';
+import 'viracc_screens.dart'; // Import ViraccScreen
 import 'profile_screen.dart'; // Import the ProfileScreen
 
 class MpembayaranScreen extends StatefulWidget {
@@ -63,18 +63,8 @@ class _MpembayaranScreenState extends State<MpembayaranScreen> {
             },
           ),
           RadioListTile(
-            title: const Text('Qris'),
-            value: "Qris",
-            groupValue: _selectedPaymentMethod,
-            onChanged: (value) {
-              setState(() {
-                _selectedPaymentMethod = value!;
-              });
-            },
-          ),
-          RadioListTile(
-            title: const Text('E-money (Ovo, Gopay, Shopee-pay, Dana)'),
-            value: "E-money",
+            title: const Text('Qris/E-money'),
+            value: "Qris/E-money",
             groupValue: _selectedPaymentMethod,
             onChanged: (value) {
               setState(() {
@@ -87,15 +77,18 @@ class _MpembayaranScreenState extends State<MpembayaranScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 60.0),
             child: ElevatedButton(
               onPressed: () {
+                // Logic for navigation
                 if (_selectedPaymentMethod == "Cash") {
+                  // Navigate to CashpayScreen
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const CashpayScreen()),
                   );
                 } else {
+                  // Navigate to ViraccScreen for Qris/E-money
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const EpayScreen()),
+                    MaterialPageRoute(builder: (context) => const ViraccScreen()),
                   );
                 }
               },

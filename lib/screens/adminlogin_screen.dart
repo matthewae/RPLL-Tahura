@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'mmpengelola_screen.dart'; // Import file mmpengelola_screen.dart
+import 'mmpengelola_screen.dart';
+import '../database/database_instance.dart';
+import '../models/pengguna.dart'; // Import file mmpengelola_screen.dart
 
 class AdminloginScreen extends StatelessWidget {
   const AdminloginScreen({super.key});
@@ -9,7 +11,7 @@ class AdminloginScreen extends StatelessWidget {
     final TextEditingController idController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
 
-    void _validateAndLogin() {
+    void _validateAndLogin() async {
       String employeeId = idController.text.trim();
       String password = passwordController.text.trim();
 
@@ -20,11 +22,8 @@ class AdminloginScreen extends StatelessWidget {
         return;
       }
 
-      // Placeholder for database validation
-      // Uncomment and implement this logic when database is ready
-      /*
       try {
-        bool isValidAdmin = await DatabaseService.validateAdmin(employeeId, password);
+        bool isValidAdmin = await DatabaseInstance.instance.validatePengelola(employeeId, password);
         if (isValidAdmin) {
           Navigator.push(
             context,
@@ -32,22 +31,15 @@ class AdminloginScreen extends StatelessWidget {
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('ID Karyawan atau Password salah')),
+            SnackBar(content: Text('ID Karyawan atau Password Salah')),
           );
         }
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error during login: $e')),
+          SnackBar(content: Text('Error durring login: $e')),
         );
       }
-      */
-
-      // Temporary navigation for testing
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => MmpengelolaScreen()),
-      );
-    }
+    }   
 
     return Scaffold(
       backgroundColor: Color.fromRGBO(129, 212, 105, 1.000), // Latar belakang hijau

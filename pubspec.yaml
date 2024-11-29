@@ -80,6 +80,7 @@ flutter:
     - assets/sambar.jpg
     - assets/teklan.jpg
     - assets/titan.jpg
+    - assets/Test Payment.jpg
 
   # To add assets to your application, add an assets section, like this:
   # assets:

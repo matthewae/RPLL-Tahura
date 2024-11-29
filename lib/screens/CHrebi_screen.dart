@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'mpembayaran_screen.dart'; // Import the payment screen
+import 'profile_screen.dart'; // Import halaman profil
+import 'mpembayaran_screen.dart'; // Import halaman pembayaran
 
 void main() {
   runApp(MyApp());
@@ -39,9 +40,17 @@ class CHrebiScreen extends StatelessWidget {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 16.0),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/profile.jpg'), // Replace with your profile image path
-              radius: 20,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()),
+                );
+              },
+              child: CircleAvatar(
+                backgroundImage: AssetImage('assets/profile.jpg'), // Ganti dengan path gambar profil
+                radius: 20,
+              ),
             ),
           ),
         ],
@@ -63,7 +72,7 @@ class CHrebiScreen extends StatelessWidget {
               alignment: Alignment.center,
               child: ElevatedButton(
                 onPressed: () {
-                  // Navigate to MpembayaranScreen when button is clicked
+                  // Navigasi ke MpembayaranScreen
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => MpembayaranScreen()),
@@ -71,7 +80,7 @@ class CHrebiScreen extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,
-                  foregroundColor: Colors.black, // Set the text color to black
+                  foregroundColor: Colors.black, // Set warna teks menjadi hitam
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),

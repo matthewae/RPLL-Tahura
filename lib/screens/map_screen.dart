@@ -22,14 +22,17 @@ class _MapScreenState extends State<MapScreen> {
     _getCurrentLocation();
   }
 
+  /// Function to fetch the current location of the device
   Future<void> _getCurrentLocation() async {
     try {
+      // Check if location services are enabled
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
       if (!serviceEnabled) {
         _showMessage('Layanan lokasi tidak aktif.');
         return;
       }
 
+      // Check and request location permissions
       LocationPermission permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
@@ -46,15 +49,18 @@ class _MapScreenState extends State<MapScreen> {
         return;
       }
 
-      // Ambil lokasi perangkat
+      // Fetch the current location of the device
       final position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
 
+      // Update the current location and loading state
       setState(() {
         _currentLocation = LatLng(position.latitude, position.longitude);
         _isLoading = false;
       });
+
+      print('Current location: ${position.latitude}, ${position.longitude}');
     } catch (e) {
       _showMessage('Gagal mendapatkan lokasi: $e');
       setState(() {
@@ -63,10 +69,12 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
+  /// Function to display a snackbar message
   void _showMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
   }
 
+  /// Add markers to the map
   List<Marker> _addMarkers() {
     final spots = [
       {
@@ -76,8 +84,12 @@ class _MapScreenState extends State<MapScreen> {
       {"title": "Curug Omas", "position": LatLng(-6.8350332, 107.6581357)},
       {"title": "Goa Jepang", "position": LatLng(-6.856518, 107.632865)},
       {"title": "Goa Belanda", "position": LatLng(-6.854471, 107.637774)},
-      {"title": "Jembatan Gantung", "position": LatLng(-6.8390, 107.6225)},
-      {"title": "Monumen Ir. H. Djuanda", "position": LatLng(-6.857481, 107.629433)},
+      
+      {"title": "Jembatan Gantung", 
+      "position": LatLng(-6.8390, 107.6225)},
+      {"title": "Monumen Ir. H. Djuanda", 
+      "position": LatLng(-6.857481, 107.629433)},
+      
       {"title": "Batu Hoe", "position": LatLng(-6.839175, 107.647933)},
       {"title": "Batu Batik", "position": LatLng(-6.8422229, 107.6482683)},
       {"title": "Pintu Masuk Maribaya", "position": LatLng(-6.8311627, 107.6509174)},
@@ -101,9 +113,11 @@ class _MapScreenState extends State<MapScreen> {
     }).toList();
   }
 
+  /// Move the map to the current location
   void _moveToCurrentLocation() {
     if (_currentLocation != null) {
       _mapController.move(_currentLocation!, 17.0);
+      print('Moving to current location: $_currentLocation');
     } else {
       _showMessage('Lokasi belum tersedia.');
     }
@@ -120,7 +134,7 @@ class _MapScreenState extends State<MapScreen> {
           FlutterMap(
             mapController: _mapController,
             options: MapOptions(
-              center: _currentLocation ?? LatLng(-6.8955314, 107.6106696),
+              center: _currentLocation ?? LatLng(-6.8955314, 107.6106696), // Default center
               zoom: 17.0,
               maxZoom: 18.0,
               minZoom: 16.0,
