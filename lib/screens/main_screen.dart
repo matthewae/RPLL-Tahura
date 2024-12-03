@@ -39,14 +39,18 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          color: Color.fromRGBO(129, 212, 105, 1.000), // New background color
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color.fromRGBO(129, 212, 105, 1.000), Color.fromRGBO(78, 162, 63, 1.000)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
         ),
         child: FadeTransition(
           opacity: _fadeInAnimation,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Spacer(),
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -57,13 +61,13 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
                       width: 150,
                       fit: BoxFit.fill,
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 15),
                     const Text(
                       'Tahura Explore Hub',
                       style: TextStyle(
-                        fontSize: 22,
+                        fontSize: 26,
                         color: Colors.white,
-                        fontFamily: 'Times New Roman',
+                        fontFamily: 'Arial',
                         fontWeight: FontWeight.bold,
                         shadows: [
                           Shadow(
@@ -74,96 +78,83 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
                         ],
                       ),
                     ),
-                    const SizedBox(height: 30),
+                    const SizedBox(height: 40),
                     // Row for buttons
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         // Login Button
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 6,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => PasswordScreen()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              backgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent,
-                            ),
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
+                        _buildButton(
+                          context,
+                          'Login',
+                          Colors.blueAccent,
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => PasswordScreen()),
+                            );
+                          },
+                          Colors.black, // Teks warna hitam
                         ),
+                        const SizedBox(width: 20),
                         // Sign Up Button
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(30),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 6,
-                                offset: const Offset(0, 2),
-                              ),
-                            ],
-                          ),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const SigninScreen()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              backgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent,
-                            ),
-                            child: const Text(
-                              'Sign Up',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
+                        _buildButton(
+                          context,
+                          'Sign Up',
+                          Colors.greenAccent,
+                          () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const SigninScreen()),
+                            );
+                          },
+                          Colors.black, // Teks warna hitam
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
-              const Spacer(),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButton(BuildContext context, String label, Color color, VoidCallback onPressed, Color textColor) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        gradient: LinearGradient(
+          colors: [color, color.withOpacity(0.8)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: ElevatedButton(
+        onPressed: onPressed, // Properly using the VoidCallback type
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+        ),
+        child: Text(
+          label,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+            color: textColor, // Teks diatur menggunakan parameter textColor
           ),
         ),
       ),

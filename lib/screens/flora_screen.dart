@@ -10,8 +10,8 @@ class FloraScreen extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.white, // White background
-              Colors.green[300]!, // Light green for gradient effect
+              Colors.white, // Background atas
+              Colors.green[100]!, // Background bawah
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -39,11 +39,11 @@ class FloraScreen extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 22,
                 ),
               ),
             ),
-            const SizedBox(height: 32.0),
+            const SizedBox(height: 16.0),
             const Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -54,25 +54,29 @@ class FloraScreen extends StatelessWidget {
                       FloraCard(
                         title: 'Pinus Merkusii',
                         image: 'assets/pinus.jpg',
-                        description: 'Pohon pinus merkusii adalah jenis pinus yang tumbuh di daerah tropis. Pohon ini memiliki tinggi mencapai 40 meter dan diameter batang hingga 1 meter.',
+                        description:
+                            'Pohon pinus merkusii adalah jenis pinus yang tumbuh di daerah tropis. Pohon ini memiliki tinggi mencapai 40 meter dan diameter batang hingga 1 meter.',
                       ),
                       SizedBox(height: 16.0),
                       FloraCard(
                         title: 'Teklan',
                         image: 'assets/teklan.jpg',
-                        description: 'Teklan atau kayu teklan adalah jenis kayu yang berasal dari pohon teklan (Tectona grandis). Kayu teklan dikenal kuat, tahan lama, dan indah, sehingga sering digunakan untuk membuat furniture, lantai, dan bahan bangunan.',
+                        description:
+                            'Teklan atau kayu teklan adalah jenis kayu yang berasal dari pohon teklan (Tectona grandis). Kayu teklan dikenal kuat, tahan lama, dan indah, sehingga sering digunakan untuk membuat furniture, lantai, dan bahan bangunan.',
                       ),
                       SizedBox(height: 16.0),
                       FloraCard(
                         title: 'Bunga bangkai (Amorphophallus titanum)',
                         image: 'assets/titan.jpg',
-                        description: 'Bunga bangkai raksasa (Amorphophallus titanum Becc.) adalah tumbuhan dari famili talas-talasan (Araceae) endemik dari Sumatra, Indonesia, yang dikenal sebagai tumbuhan dengan bunga majemuk terbesar di dunia, meskipun catatan menyebutkan bahwa kerabatnya, A. gigas (juga endemik dari Sumatra) dapat menghasilkan bunga setinggi 5 m.',
+                        description:
+                            'Bunga bangkai raksasa (Amorphophallus titanum Becc.) adalah tumbuhan dari famili talas-talasan (Araceae) endemik dari Sumatra, Indonesia, yang dikenal sebagai tumbuhan dengan bunga majemuk terbesar di dunia.',
                       ),
                       SizedBox(height: 16.0),
                       FloraCard(
                         title: 'Anggrek akar (Taeniophyllum sp)',
                         image: 'assets/anggrek.jpg',
-                        description: 'Salah satu anggrek yang paling mencuri perhatian bagi para pencinta anggrek ialah anggrek akar atau Taeniophyllum sp. Berbeda dari umumnya, anggrek ini sangat kecil dengan ukuran 1-2 milimeter. Bentuknya yang mini membuat tanaman ini mendapat predikat anggrek terkecil di dunia.',
+                        description:
+                            'Salah satu anggrek yang paling mencuri perhatian bagi para pencinta anggrek ialah anggrek akar atau Taeniophyllum sp. Berbeda dari umumnya, anggrek ini sangat kecil dengan ukuran 1-2 milimeter.',
                       ),
                     ],
                   ),
@@ -100,25 +104,24 @@ class FloraCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        border: Border.all(
-          color: Colors.green,
-          width: 1.0,
-        ),
-        color: const Color.fromRGBO(129, 212, 105, 1.000), // Green color for cards
+    return Card(
+      elevation: 5.0, // Menambahkan bayangan untuk efek 3D
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
       ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: Container(
-              padding: const EdgeInsets.all(4.0),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.green),
-                borderRadius: BorderRadius.circular(12.0),
-              ),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.green[100]!, Colors.green[300]!], // Gradient background
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.0),
               child: Image.asset(
                 image,
                 width: 120,
@@ -126,33 +129,67 @@ class FloraCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  Text(
-                    description,
-                    style: const TextStyle(
-                      fontSize: 12.0,
+                    const SizedBox(height: 8.0),
+                    Text(
+                      description,
+                      style: const TextStyle(
+                        fontSize: 12.0,
+                        color: Colors.black87,
+                      ),
+                      textAlign: TextAlign.justify,
                     ),
-                    textAlign: TextAlign.justify,
-                  ),
-                ],
+                    const SizedBox(height: 12.0),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          // Fungsi untuk detail lebih lanjut
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text(title),
+                                content: Text(description),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text('Tutup'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green[700],
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        child: const Text('Lihat Detail'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

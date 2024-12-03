@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'CHrebi_screen.dart'; // Replace with the correct path.
-import 'profile_screen.dart'; // Import ProfileScreen.
 
 class DetailrebiScreen extends StatefulWidget {
   const DetailrebiScreen({super.key});
@@ -103,7 +102,8 @@ class _DetailrebiScreenState extends State<DetailrebiScreen> {
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(errorMessage), duration: const Duration(seconds: 3)),
+        SnackBar(
+            content: Text(errorMessage), duration: const Duration(seconds: 3)),
       );
     } else {
       Navigator.push(
@@ -128,29 +128,13 @@ class _DetailrebiScreenState extends State<DetailrebiScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.0),
-        elevation: 0,
+        elevation: 0, // Tanpa bayangan
         title: const Text(
           "Pemesanan Sepeda",
           style: TextStyle(color: Colors.black),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const CircleAvatar(
-              backgroundImage: AssetImage(
-                  'assets/rusa.jpg'), // Replace with your avatar image
-            ),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        const ProfileScreen()), // Navigate to ProfileScreen
-              );
-            },
-          ),
-        ],
+        automaticallyImplyLeading: false, // Hilangkan tombol back
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -164,7 +148,8 @@ class _DetailrebiScreenState extends State<DetailrebiScreen> {
               (value) {
                 setState(() {
                   selectedBikeType = value;
-                  totalPenyewaanController.clear(); // Reset total saat jenis sepeda berubah
+                  totalPenyewaanController
+                      .clear(); // Reset total saat jenis sepeda berubah
                 });
               },
             ),

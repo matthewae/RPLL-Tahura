@@ -10,9 +10,13 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  final LatLng _defaultLocation = LatLng(-6.899517, 107.622478); // Lokasi STMIK LIKMI
-  LatLng? _markerLocation; // Lokasi marker yang akan ditampilkan saat klik tombol
+  final LatLng _defaultLocation =
+      LatLng(-6.8955201570034115, 107.61324386829472); // Lokasi STMIK LIKMI
+  LatLng?
+      _markerLocation; // Lokasi marker yang akan ditampilkan saat klik tombol
   late final MapController _mapController;
+
+  double _currentZoom = 17.0; // Zoom awal
 
   @override
   void initState() {
@@ -31,10 +35,16 @@ class _MapScreenState extends State<MapScreen> {
       {"title": "Goa Jepang", "position": LatLng(-6.856518, 107.632865)},
       {"title": "Goa Belanda", "position": LatLng(-6.854471, 107.637774)},
       {"title": "Jembatan Gantung", "position": LatLng(-6.8390, 107.6225)},
-      {"title": "Monumen Ir. H. Djuanda", "position": LatLng(-6.857481, 107.629433)},
+      {
+        "title": "Monumen Ir. H. Djuanda",
+        "position": LatLng(-6.857481, 107.629433),
+      },
       {"title": "Batu Hoe", "position": LatLng(-6.839175, 107.647933)},
       {"title": "Batu Batik", "position": LatLng(-6.8422229, 107.6482683)},
-      {"title": "Pintu Masuk Maribaya", "position": LatLng(-6.8311627, 107.6509174)},
+      {
+        "title": "Pintu Masuk Maribaya",
+        "position": LatLng(-6.8311627, 107.6509174),
+      },
     ];
 
     // Tambahkan marker lokasi saat ini (jika sudah diatur)
@@ -61,7 +71,28 @@ class _MapScreenState extends State<MapScreen> {
     setState(() {
       _markerLocation = _defaultLocation; // Atur lokasi marker
     });
-    _mapController.move(_defaultLocation, 17.0); // Pindahkan peta ke lokasi default
+    _mapController.move(
+        _defaultLocation, _currentZoom); // Pindahkan peta ke lokasi default
+  }
+
+  /// Zoom in pada peta
+  void _zoomIn() {
+    setState(() {
+      if (_currentZoom < 18.0) {
+        _currentZoom += 1.0; // Tambah level zoom
+        _mapController.move(_mapController.center, _currentZoom);
+      }
+    });
+  }
+
+  /// Zoom out pada peta
+  void _zoomOut() {
+    setState(() {
+      if (_currentZoom > 16.0) {
+        _currentZoom -= 1.0; // Kurangi level zoom
+        _mapController.move(_mapController.center, _currentZoom);
+      }
+    });
   }
 
   @override
@@ -69,25 +100,54 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Map - Tahura'),
+        automaticallyImplyLeading: false, // Menghilangkan tombol kembali
       ),
-      body: FlutterMap(
-        mapController: _mapController,
-        options: MapOptions(
-          center: _defaultLocation, // Titik pusat awal peta
-          zoom: 17.0,
-          maxZoom: 18.0,
-          minZoom: 16.0,
-          interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
-        ),
+      body: Stack(
         children: [
-          TileLayer(
-            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            subdomains: const ['a', 'b', 'c'],
+          FlutterMap(
+            mapController: _mapController,
+            options: MapOptions(
+              center: _defaultLocation, // Titik pusat awal peta
+              zoom: _currentZoom,
+              maxZoom: 18.0,
+              minZoom: 16.0,
+              interactiveFlags:
+                  InteractiveFlag.drag | InteractiveFlag.pinchZoom,
+            ),
+            children: [
+              TileLayer(
+                urlTemplate:
+                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                subdomains: const ['a', 'b', 'c'],
+              ),
+              MarkerLayer(markers: _addMarkers()), // Tambahkan marker layer
+            ],
           ),
-          MarkerLayer(markers: _addMarkers()), // Tambahkan marker layer
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: Column(
+              children: [
+                FloatingActionButton(
+                  heroTag: 'zoom_in_button', // Hero tag unik
+                  onPressed: _zoomIn,
+                  child: const Icon(Icons.zoom_in),
+                  tooltip: 'Zoom In',
+                ),
+                const SizedBox(height: 10),
+                FloatingActionButton(
+                  heroTag: 'zoom_out_button', // Hero tag unik
+                  onPressed: _zoomOut,
+                  child: const Icon(Icons.zoom_out),
+                  tooltip: 'Zoom Out',
+                ),
+              ],
+            ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: 'move_to_default', // Hero tag unik
         onPressed: _moveToDefaultLocation,
         child: const Icon(Icons.my_location),
         tooltip: 'Ke Lokasi Awal',

@@ -10,8 +10,8 @@ class FaunaScreen extends StatelessWidget {
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Colors.white, // White background
-              Colors.green[300]!, // Light green for gradient effect
+              Colors.white,
+              Colors.green[100]!,
             ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -39,11 +39,11 @@ class FaunaScreen extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 22,
                 ),
               ),
             ),
-            const SizedBox(height: 32.0),
+            const SizedBox(height: 16.0),
             const Expanded(
               child: SingleChildScrollView(
                 child: Padding(
@@ -54,37 +54,43 @@ class FaunaScreen extends StatelessWidget {
                       FaunaCard(
                         title: 'Rusa Sambar (Cervus unicolor)',
                         image: 'assets/sambar.jpg',
-                        description: 'Rusa sambar atau sambar india adalah jenis rusa besar yang umum berhabitat di Asia. Spesies ini memiliki ciri khas tubuh besar dengan warna bulu kecokelatan.',
+                        description:
+                            'Rusa sambar atau sambar india adalah jenis rusa besar yang umum berhabitat di Asia. Spesies ini memiliki ciri khas tubuh besar dengan warna bulu kecokelatan.',
                       ),
                       SizedBox(height: 16.0),
                       FaunaCard(
                         title: 'Kera Ekor Panjang (Macaca fascicularis)',
                         image: 'assets/monyet.jpg',
-                        description: 'Monyet pemakan kepiting adalah primata cercopithecine yang berasal dari Asia Tenggara, dikenal sebagai monyet ekor panjang atau cynomolgus.',
+                        description:
+                            'Monyet pemakan kepiting adalah primata cercopithecine yang berasal dari Asia Tenggara, dikenal sebagai monyet ekor panjang atau cynomolgus.',
                       ),
                       SizedBox(height: 16.0),
                       FaunaCard(
                         title: 'Burung Cucak Kuning (Rubigula dispar)',
                         image: 'assets/burung.jpg',
-                        description: 'Burung cucak berukuran sedang, endemik di Jawa, Sumatera dan Bali, dikenal dengan warna kuning emas dan tenggorokan merah darah.',
+                        description:
+                            'Burung cucak berukuran sedang, endemik di Jawa, Sumatera dan Bali, dikenal dengan warna kuning emas dan tenggorokan merah darah.',
                       ),
                       SizedBox(height: 16.0),
                       FaunaCard(
                         title: 'Ayam Hutan',
                         image: 'assets/ayam.jpg',
-                        description: 'Ayam hutan adalah leluhur dari ayam peliharaan. Burung ini hidup di hutan dan memiliki bentuk tubuh serta perilaku yang serupa dengan ayam kampung.',
+                        description:
+                            'Ayam hutan adalah leluhur dari ayam peliharaan. Burung ini hidup di hutan dan memiliki bentuk tubuh serta perilaku yang serupa dengan ayam kampung.',
                       ),
                       SizedBox(height: 16.0),
                       FaunaCard(
                         title: 'Burung Kepodang',
                         image: 'assets/kepodang.jpg',
-                        description: 'Burung berkicau dengan bulu indah, terkenal sebagai burung pesolek. Kepodang sulit dibedakan antara jantan dan betina berdasarkan bentuk fisik.',
+                        description:
+                            'Burung berkicau dengan bulu indah, terkenal sebagai burung pesolek. Kepodang sulit dibedakan antara jantan dan betina berdasarkan bentuk fisik.',
                       ),
                       SizedBox(height: 16.0),
                       FaunaCard(
                         title: 'Burung Kutilang',
                         image: 'assets/kutilang.jpg',
-                        description: 'Kutilang adalah burung pengicau dari suku Pycnonotidae, dikenal dengan bulu di sekitar pantatnya yang berwarna jingga.',
+                        description:
+                            'Kutilang adalah burung pengicau dari suku Pycnonotidae, dikenal dengan bulu di sekitar pantatnya yang berwarna jingga.',
                       ),
                     ],
                   ),
@@ -112,25 +118,24 @@ class FaunaCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
-        border: Border.all(
-          color: Colors.green,
-          width: 1.0,
-        ),
-        color: const Color.fromRGBO(129, 212, 105, 1.000), // Green color for cards
+    return Card(
+      elevation: 5.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16.0),
       ),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: Container(
-              padding: const EdgeInsets.all(4.0),
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.green),
-                borderRadius: BorderRadius.circular(12.0),
-              ),
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.green[100]!, Colors.green[300]!],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.0),
               child: Image.asset(
                 image,
                 width: 120,
@@ -138,33 +143,66 @@ class FaunaCard extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-          ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  Text(
-                    description,
-                    style: const TextStyle(
-                      fontSize: 12.0,
+                    const SizedBox(height: 8.0),
+                    Text(
+                      description,
+                      style: const TextStyle(
+                        fontSize: 12.0,
+                        color: Colors.black87,
+                      ),
+                      textAlign: TextAlign.justify,
                     ),
-                    textAlign: TextAlign.justify,
-                  ),
-                ],
+                    const SizedBox(height: 12.0),
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text(title),
+                                content: Text(description),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(context),
+                                    child: const Text('Tutup'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.green[700],
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        child: const Text('Lihat Detail'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
