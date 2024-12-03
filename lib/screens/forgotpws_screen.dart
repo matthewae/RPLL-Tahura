@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/screens/password_screen.dart';
-import 'mainmenu_screen.dart'; 
 
 void main() {
-  runApp(TahuraApp());
+  runApp(const TahuraApp());
 }
 
 class TahuraApp extends StatelessWidget {
+  const TahuraApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -21,20 +22,22 @@ class ForgotpwsScreen extends StatelessWidget {
   final TextEditingController newPasswordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
+  ForgotpwsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+      backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.pop(context); // Kembali ke layar sebelumnya
           },
         ),
-        title: Center(
+        title: const Center(
           child: Text(
             'FORGOT PASSWORD',
             style: TextStyle(
@@ -50,30 +53,30 @@ class ForgotpwsScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             TextField(
               controller: usernameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'UserName',
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: newPasswordController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'New Password',
                 filled: true,
                 fillColor: Colors.white,
@@ -81,10 +84,10 @@ class ForgotpwsScreen extends StatelessWidget {
               ),
               obscureText: true,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: confirmPasswordController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Confirm New Password',
                 filled: true,
                 fillColor: Colors.white,
@@ -92,7 +95,7 @@ class ForgotpwsScreen extends StatelessWidget {
               ),
               obscureText: true,
             ),
-            SizedBox(height: 24),
+            const SizedBox(height: 24),
             ElevatedButton(
               onPressed: () {
                 String username = usernameController.text;
@@ -102,7 +105,7 @@ class ForgotpwsScreen extends StatelessWidget {
 
                 if (newPassword != confirmPassword) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Passwords do not match!')),
+                    const SnackBar(content: Text('Passwords do not match!')),
                   );
                   return;
                 }
@@ -138,12 +141,12 @@ class ForgotpwsScreen extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
-                padding: EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'SAVE',
                 style: TextStyle(fontSize: 16),
               ),

@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'mainmenu_screen.dart'; 
 
 class CashpayScreen extends StatelessWidget {
-  const CashpayScreen({Key? key}) : super(key: key);
+  const CashpayScreen({super.key});
 
   // Function to generate a random code for the bike pickup
   String generateRandomCode() {
     final random = Random();
     const characters = '0123456789';
-    return 'SBSC' +
-        List.generate(
-            6, (index) => characters[random.nextInt(characters.length)]).join();
+    return 'SBSC${List.generate(
+            6, (index) => characters[random.nextInt(characters.length)]).join()}';
   }
 
   @override
@@ -21,7 +20,7 @@ class CashpayScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white, // Background white
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -40,9 +39,9 @@ class CashpayScreen extends StatelessWidget {
             crossAxisAlignment:
                 CrossAxisAlignment.center, // Center content horizontally
             children: [
-              Column(
+              const Column(
                 children: [
-                  const Text(
+                  Text(
                     'Metode Pembayaran',
                     style: TextStyle(
                       fontSize: 18,
@@ -50,8 +49,8 @@ class CashpayScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 5), // Add space between the lines
-                  const Text(
+                  SizedBox(height: 5), // Add space between the lines
+                  Text(
                     '(Menggunakan cash)',
                     style: TextStyle(
                       fontSize: 16,
@@ -131,7 +130,7 @@ class CashpayScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            MainmenuScreen()), // Navigate to MainMenuScreen
+                            const MainmenuScreen()), // Navigate to MainMenuScreen
                   );
                 },
                 style: ElevatedButton.styleFrom(

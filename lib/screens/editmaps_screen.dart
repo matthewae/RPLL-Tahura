@@ -6,7 +6,7 @@ class EditmapsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000), // Warna latar belakang hijau
+      backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000), // Warna latar belakang hijau
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -44,18 +44,18 @@ class EditmapsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
+                  Text(
                     'Choose File',
                     style: TextStyle(
                       color: Colors.black54,
                       fontSize: 16,
                     ),
                   ),
-                  const SizedBox(width: 8.0),
-                  const Icon(Icons.image, color: Colors.black54),
+                  SizedBox(width: 8.0),
+                  Icon(Icons.image, color: Colors.black54),
                 ],
               ),
             ),

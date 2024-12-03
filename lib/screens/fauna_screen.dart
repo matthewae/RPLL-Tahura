@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FaunaScreen extends StatelessWidget {
-  const FaunaScreen({Key? key}) : super(key: key);
+  const FaunaScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +44,10 @@ class FaunaScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32.0),
-            Expanded(
+            const Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -56,31 +56,31 @@ class FaunaScreen extends StatelessWidget {
                         image: 'assets/sambar.jpg',
                         description: 'Rusa sambar atau sambar india adalah jenis rusa besar yang umum berhabitat di Asia. Spesies ini memiliki ciri khas tubuh besar dengan warna bulu kecokelatan.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       FaunaCard(
                         title: 'Kera Ekor Panjang (Macaca fascicularis)',
                         image: 'assets/monyet.jpg',
                         description: 'Monyet pemakan kepiting adalah primata cercopithecine yang berasal dari Asia Tenggara, dikenal sebagai monyet ekor panjang atau cynomolgus.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       FaunaCard(
                         title: 'Burung Cucak Kuning (Rubigula dispar)',
                         image: 'assets/burung.jpg',
                         description: 'Burung cucak berukuran sedang, endemik di Jawa, Sumatera dan Bali, dikenal dengan warna kuning emas dan tenggorokan merah darah.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       FaunaCard(
                         title: 'Ayam Hutan',
                         image: 'assets/ayam.jpg',
                         description: 'Ayam hutan adalah leluhur dari ayam peliharaan. Burung ini hidup di hutan dan memiliki bentuk tubuh serta perilaku yang serupa dengan ayam kampung.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       FaunaCard(
                         title: 'Burung Kepodang',
                         image: 'assets/kepodang.jpg',
                         description: 'Burung berkicau dengan bulu indah, terkenal sebagai burung pesolek. Kepodang sulit dibedakan antara jantan dan betina berdasarkan bentuk fisik.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       FaunaCard(
                         title: 'Burung Kutilang',
                         image: 'assets/kutilang.jpg',
@@ -104,11 +104,11 @@ class FaunaCard extends StatelessWidget {
   final String description;
 
   const FaunaCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.image,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

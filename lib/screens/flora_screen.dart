@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class FloraScreen extends StatelessWidget {
-  const FloraScreen({Key? key}) : super(key: key);
+  const FloraScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +44,10 @@ class FloraScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32.0),
-            Expanded(
+            const Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -56,19 +56,19 @@ class FloraScreen extends StatelessWidget {
                         image: 'assets/pinus.jpg',
                         description: 'Pohon pinus merkusii adalah jenis pinus yang tumbuh di daerah tropis. Pohon ini memiliki tinggi mencapai 40 meter dan diameter batang hingga 1 meter.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       FloraCard(
                         title: 'Teklan',
                         image: 'assets/teklan.jpg',
                         description: 'Teklan atau kayu teklan adalah jenis kayu yang berasal dari pohon teklan (Tectona grandis). Kayu teklan dikenal kuat, tahan lama, dan indah, sehingga sering digunakan untuk membuat furniture, lantai, dan bahan bangunan.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       FloraCard(
                         title: 'Bunga bangkai (Amorphophallus titanum)',
                         image: 'assets/titan.jpg',
                         description: 'Bunga bangkai raksasa (Amorphophallus titanum Becc.) adalah tumbuhan dari famili talas-talasan (Araceae) endemik dari Sumatra, Indonesia, yang dikenal sebagai tumbuhan dengan bunga majemuk terbesar di dunia, meskipun catatan menyebutkan bahwa kerabatnya, A. gigas (juga endemik dari Sumatra) dapat menghasilkan bunga setinggi 5 m.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       FloraCard(
                         title: 'Anggrek akar (Taeniophyllum sp)',
                         image: 'assets/anggrek.jpg',
@@ -92,11 +92,11 @@ class FloraCard extends StatelessWidget {
   final String description;
 
   const FloraCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.image,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

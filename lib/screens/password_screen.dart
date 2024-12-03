@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'signin_screen.dart';
 import 'forgotpws_screen.dart';
 import 'mainmenu_screen.dart';
-import 'adminlogin_screen.dart';
+// import 'adminlogin_screen.dart';
 import '../database/database_instance.dart';
 import '../models/pengguna.dart';
 
@@ -38,7 +38,7 @@ class PasswordScreen extends StatelessWidget {
 
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Email dan Password tidak boleh kosong')),
+        const SnackBar(content: Text('Email dan Password tidak boleh kosong')),
       );
       return;
     }
@@ -52,11 +52,11 @@ class PasswordScreen extends StatelessWidget {
       if (isValidUser) {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MainmenuScreen()),
+          MaterialPageRoute(builder: (context) => const MainmenuScreen()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Email atau Password Salah')),
+          const SnackBar(content: Text('Email atau Password Salah')),
         );
       }
     } catch (e) {
@@ -66,18 +66,11 @@ class PasswordScreen extends StatelessWidget {
     }
   }
 
-    void _navigateToAdminLogin(BuildContext context) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => AdminloginScreen()), // Halaman Admin
-      );
-    }
 
     @override
     Widget build(BuildContext context) {
       return Scaffold(
-        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           elevation: 0,
@@ -235,17 +228,6 @@ class PasswordScreen extends StatelessWidget {
                       onPressed: () => _register(context),
                       child: const Text(
                         'Register',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8.0),
-                    TextButton(
-                      onPressed: () => _navigateToAdminLogin(context),
-                      child: const Text(
-                        'Admin',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

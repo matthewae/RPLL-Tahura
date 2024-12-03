@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SpotScreen extends StatelessWidget {
-  const SpotScreen({Key? key}) : super(key: key);
+  const SpotScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,10 +44,10 @@ class SpotScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 32.0),
-            Expanded(
+            const Expanded(
               child: SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -57,27 +57,27 @@ class SpotScreen extends StatelessWidget {
                         description:
                             'Pada masa penjajahan Belanda, Belanda membangun berbagai infrastruktur di berbagai wilayah, termasuk di Kota Bandung. Salah satunya adalah pembangunan gua-gua buatan manusia. Gua Belanda dibangun pada tahun 1923 sebagai tempat penyimpanan dan perlindungan saat terjadi serangan udara atau serangan musuh.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       SpotCard(
                         title: 'Goa Jepang',
                         image: 'assets/jepang.jpg',
                         description:
                             'Goa Jepang adalah salah satu tempat bersejarah yang dibangun oleh Jepang selama Perang Dunia II. Goa ini digunakan sebagai tempat pertahanan dan penyimpanan amunisi.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       SpotCard(
                         title: 'Penangkaran Rusa',
                         image: 'assets/rusa.jpg',
                         description:
                             'Penangkaran Rusa adalah tempat yang didedikasikan untuk melindungi dan melestarikan spesies rusa yang terancam punah.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       SpotCard(
                         title: 'Curug Omas',
                         image: 'assets/omas.jpg',
                         description: 'Curug Omas merupakan air terjun yang memiliki ketinggian mencapai 30 meter dengan kedalaman air mencapai 10 meter di Tahura Djuanda. Curug Omas merupakan sebuah titik pertemuan dari dua aliran sungai yaitu sungai Cikawari dan sungai Cigulun.',
                       ),
-                      const SizedBox(height: 16.0),
+                      SizedBox(height: 16.0),
                       SpotCard(
                         title: 'Batu Selendang Dayang',
                         image: 'assets/batik.jpg',
@@ -101,11 +101,11 @@ class SpotCard extends StatelessWidget {
   final String description;
 
   const SpotCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.image,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

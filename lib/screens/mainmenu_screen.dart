@@ -4,9 +4,11 @@ import 'map_screen.dart';
 import 'flora_screen.dart';
 import 'fauna_screen.dart';
 import 'spot_screen.dart';
-import 'sepeda_screen.dart'; // Import SepedaScreen
+import 'detailrebi_screen.dart'; // Import SepedaScreen
 
 class MainmenuScreen extends StatefulWidget {
+  const MainmenuScreen({super.key});
+
   @override
   _MainmenuScreenState createState() => _MainmenuScreenState();
 }
@@ -34,7 +36,7 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProfileScreen(),
+                        builder: (context) => const ProfileScreen(),
                       ),
                     );
                   },
@@ -72,7 +74,7 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                FloraScreen(),
+                                                const FloraScreen(),
                                           ),
                                         );
                                       } else if (category == 'Fauna') {
@@ -80,7 +82,7 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                FaunaScreen(),
+                                                const FaunaScreen(),
                                           ),
                                         );
                                       } else if (category == 'Spot') {
@@ -88,7 +90,7 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                SpotScreen(),
+                                                const SpotScreen(),
                                           ),
                                         );
                                       }
@@ -164,8 +166,8 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
                         ),
                       )
                     : _selectedIndex == 1
-                        ? MapScreen() // Halaman Map tetap
-                        : SepedaScreen(), // Halaman Sepeda
+                        ? const MapScreen() // Halaman Map tetap
+                        : const DetailrebiScreen(), // Halaman Sepeda
               ),
               BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,

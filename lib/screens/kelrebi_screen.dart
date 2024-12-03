@@ -4,20 +4,22 @@ import 'invsepeda_screen.dart';
 import 'sistran_screen.dart';
 
 class KelrebiScreen extends StatelessWidget {
+  const KelrebiScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+      backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           'Kelola Sepeda',
           style: TextStyle(
             color: Colors.white,
@@ -35,34 +37,34 @@ class KelrebiScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => InvsepedaScreen()),
+                  MaterialPageRoute(builder: (context) => const InvsepedaScreen()),
                 );
               },
-              child: Text('Inventaris Sepeda'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                textStyle: TextStyle(fontSize: 18),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                textStyle: const TextStyle(fontSize: 18),
               ),
+              child: const Text('Inventaris Sepeda'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             
             // Sistem Transaksi Button
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => SistranScreen()),
+                  MaterialPageRoute(builder: (context) => const SistranScreen()),
                 );
               },
-              child: Text('Sistem Transaksi'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 foregroundColor: Colors.black,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                textStyle: TextStyle(fontSize: 18),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                textStyle: const TextStyle(fontSize: 18),
               ),
+              child: const Text('Sistem Transaksi'),
             ),
           ],
         ),

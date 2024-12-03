@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SistranScreen extends StatelessWidget {
-  const SistranScreen({Key? key}) : super(key: key);
+  const SistranScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +12,9 @@ class SistranScreen extends StatelessWidget {
     final TextEditingController kodePengambilanController = TextEditingController(text: 'SBSE00001');
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+      backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -44,7 +44,7 @@ class SistranScreen extends StatelessWidget {
             const SizedBox(height: 8),
             TextField(
               controller: namaPengunjungController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
@@ -59,7 +59,7 @@ class SistranScreen extends StatelessWidget {
             const SizedBox(height: 8),
             TextField(
               controller: jenisSepedaController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
@@ -74,7 +74,7 @@ class SistranScreen extends StatelessWidget {
             const SizedBox(height: 8),
             TextField(
               controller: hargaSepedaController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
@@ -89,7 +89,7 @@ class SistranScreen extends StatelessWidget {
             const SizedBox(height: 8),
             TextField(
               controller: kodePengambilanController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),

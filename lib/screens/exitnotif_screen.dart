@@ -3,7 +3,7 @@ import 'password_screen.dart'; // Import PasswordScreen
 import 'profile_screen.dart'; // Import ProfileScreen
 
 class ExitnotifScreen extends StatelessWidget {
-  const ExitnotifScreen({Key? key}) : super(key: key);
+  const ExitnotifScreen({super.key});
 
   void _navigateToPasswordScreen(BuildContext context) {
     Navigator.pushReplacement(
@@ -15,7 +15,7 @@ class ExitnotifScreen extends StatelessWidget {
   void _navigateToProfileScreen(BuildContext context) {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => ProfileScreen()),
+      MaterialPageRoute(builder: (context) => const ProfileScreen()),
     );
   }
 
@@ -36,7 +36,7 @@ class ExitnotifScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Profile Picture Section
-            CircleAvatar(
+            const CircleAvatar(
               radius: 50,
               backgroundImage: NetworkImage(
                 'https://images.unsplash.com/photo-1534528740805-52a86510e3f5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cHJvZmlsZXxlbnwwfHxlbnwwfHwyMDI2fDIwNjI2MA&auto=format&fit=crop&w=500&q=60',

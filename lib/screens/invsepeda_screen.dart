@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'kelrebi_screen.dart';
 
 class InvsepedaScreen extends StatelessWidget {
-  const InvsepedaScreen({Key? key}) : super(key: key);
+  const InvsepedaScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,9 +12,9 @@ class InvsepedaScreen extends StatelessWidget {
     final TextEditingController stockController = TextEditingController();
 
     return Scaffold(
-      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+      backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
@@ -47,7 +47,7 @@ class InvsepedaScreen extends StatelessWidget {
             const SizedBox(height: 8),
             TextField(
               controller: jenisSepedaController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
@@ -65,7 +65,7 @@ class InvsepedaScreen extends StatelessWidget {
             const SizedBox(height: 8),
             TextField(
               controller: hargaSewaController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
@@ -83,7 +83,7 @@ class InvsepedaScreen extends StatelessWidget {
             const SizedBox(height: 8),
             TextField(
               controller: stockController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 border: OutlineInputBorder(),
@@ -105,7 +105,7 @@ class InvsepedaScreen extends StatelessWidget {
                   // Navigasi kembali ke KelrebiScreen setelah menyimpan
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => KelrebiScreen()),
+                    MaterialPageRoute(builder: (context) => const KelrebiScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(

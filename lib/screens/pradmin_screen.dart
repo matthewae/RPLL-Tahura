@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'password_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,23 +16,25 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: PradminScreen(),
+      home: const PradminScreen(),
     );
   }
 }
 
 class PradminScreen extends StatelessWidget {
-  final String employeeId = '12345'; // Replace with the actual ID from your database
+  final String employeeId = '12345';
+
+  const PradminScreen({super.key}); // Replace with the actual ID from your database
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+      backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -41,14 +45,14 @@ class PradminScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Profile Picture
-            CircleAvatar(
+            const CircleAvatar(
               radius: 50,
               backgroundImage: NetworkImage('https://example.com/profile.jpg'),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Employee ID Label and Display
-            Text(
+            const Text(
               'Id Karyawan:',
               style: TextStyle(
                 fontSize: 20,
@@ -59,7 +63,7 @@ class PradminScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(5),
@@ -67,7 +71,7 @@ class PradminScreen extends StatelessWidget {
                 ),
                 child: Text(
                   employeeId,
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+                  style: const TextStyle(fontSize: 16, color: Colors.black),
                 ),
               ),
             ),
@@ -81,13 +85,13 @@ class PradminScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => PasswordScreen()),
                 );
               },
-              child: Text(
-                'LOG OUT',
-                style: TextStyle(color: Colors.black),
-              ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue,
-                textStyle: TextStyle(fontSize: 18),
+                textStyle: const TextStyle(fontSize: 18),
+              ),
+              child: const Text(
+                'LOG OUT',
+                style: TextStyle(color: Colors.black),
               ),
             ),
           ],

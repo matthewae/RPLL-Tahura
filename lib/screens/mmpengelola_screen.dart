@@ -21,18 +21,18 @@ class _MmpengelolaScreenState extends State<MmpengelolaScreen> {
     if (index == 0) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => EditinfoScreen()),
+        MaterialPageRoute(builder: (context) => const EditinfoScreen()),
       );
     } else if (index == 2) {
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => KelrebiScreen()),
+        MaterialPageRoute(builder: (context) => const KelrebiScreen()),
       );
     } else if (index == 3) {
       // Navigasi ke KelpenScreen ketika tab User di kanan bawah diklik
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => KelpenScreen()),
+        MaterialPageRoute(builder: (context) => const KelpenScreen()),
       );
     } else {
       setState(() {
@@ -44,7 +44,7 @@ class _MmpengelolaScreenState extends State<MmpengelolaScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+      backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -54,7 +54,7 @@ class _MmpengelolaScreenState extends State<MmpengelolaScreen> {
             // Navigasi ke halaman PradminScreen ketika ikon profile di kiri atas diklik
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => PradminScreen()),
+              MaterialPageRoute(builder: (context) => const PradminScreen()),
             );
           },
         ),
@@ -82,15 +82,15 @@ class _MmpengelolaScreenState extends State<MmpengelolaScreen> {
       body: IndexedStack(
         index: _selectedIndex,
         children: [
-          Center(child: Text("Info Screen")), // Placeholder untuk halaman Info
+          const Center(child: Text("Info Screen")), // Placeholder untuk halaman Info
           Center(
             child: Image.asset(
               'assets/tahura_map.png',
               fit: BoxFit.cover,
             ),
           ),
-          Center(child: Text("ReBi Screen")), // Placeholder untuk halaman ReBi
-          Center(child: Text("User Screen")), // Placeholder untuk halaman User
+          const Center(child: Text("ReBi Screen")), // Placeholder untuk halaman ReBi
+          const Center(child: Text("User Screen")), // Placeholder untuk halaman User
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

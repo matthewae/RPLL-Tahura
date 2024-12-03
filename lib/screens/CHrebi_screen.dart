@@ -1,92 +1,86 @@
 import 'package:flutter/material.dart';
-import 'profile_screen.dart'; // Import halaman profil
-import 'mpembayaran_screen.dart'; // Import halaman pembayaran
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: CHrebiScreen(),
-    );
-  }
-}
+import 'mpembayaran_screen.dart';
 
 class CHrebiScreen extends StatelessWidget {
-  final namaPengunjungController = TextEditingController();
-  final jumlahJamSewaController = TextEditingController();
-  final jamPengambilanController = TextEditingController();
-  final jamPengembalianController = TextEditingController();
+  const CHrebiScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
+    final arguments = ModalRoute.of(context)?.settings.arguments;
+
+    if (arguments is! Map<String, dynamic>) {
+      return Scaffold(
+        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.0),
+        appBar: AppBar(
+          title: const Text('Error'),
         ),
-        title: Text(
-          "Check Out Pemesanan",
-          style: TextStyle(color: Colors.black),
-        ),
-        centerTitle: true,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 16.0),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ProfileScreen()),
-                );
-              },
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/profile.jpg'), // Ganti dengan path gambar profil
-                radius: 20,
-              ),
-            ),
+        body: const Center(
+          child: Text(
+            'Data tidak valid. Pastikan data yang dikirim sesuai format.',
+            style: TextStyle(color: Colors.red, fontSize: 16),
           ),
-        ],
+        ),
+      );
+    }
+
+    final String bikeType = arguments['bikeType']?.toString() ?? 'Tidak diketahui';
+    final String price = arguments['price']?.toString() ?? 'Tidak diketahui';
+    final String jumlahJamSewa = arguments['jumlahJamSewa']?.toString() ?? 'Tidak diketahui';
+    final String jamPengambilan = arguments['jamPengambilan']?.toString() ?? 'Tidak diketahui';
+    final String jamPengembalian = arguments['jamPengembalian']?.toString() ?? 'Tidak diketahui';
+
+    return Scaffold(
+      backgroundColor: const Color.fromRGBO(129, 212, 105, 1.0),
+      appBar: AppBar(
+        title: const Text('Checkout Pemesanan'),
+        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.0),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTextField("Nama Pengunjung :", namaPengunjungController),
-            SizedBox(height: 14),
-            _buildTextField("Jumlah Jam Sewa :", jumlahJamSewaController, suffixText: "Jam"),
-            SizedBox(height: 14),
-            _buildTextField("Jam Pengambilan Sepeda :", jamPengambilanController, suffixText: "Jam"),
-            SizedBox(height: 14),
-            _buildTextField("Jam Pengembalian Sepeda :", jamPengembalianController, suffixText: "Jam"),
-            SizedBox(height: 14),
-            Align(
-              alignment: Alignment.center,
+            _buildLabeledField('Jenis Sepeda', bikeType),
+            _buildLabeledField('Harga', price),
+            _buildLabeledField('Jumlah Jam Sewa', '$jumlahJamSewa Jam'),
+            _buildLabeledField('Jam Pengambilan', '$jamPengambilan Jam'),
+            _buildLabeledField('Jam Pengembalian', '$jamPengembalian Jam'),
+            const SizedBox(height: 30),
+            Center(
               child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  backgroundColor: Colors.white,
+                  foregroundColor: const Color.fromRGBO(129, 212, 105, 1.0),
+                  elevation: 5,
+                ),
                 onPressed: () {
-                  // Navigasi ke MpembayaranScreen
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MpembayaranScreen()),
+                    MaterialPageRoute(
+                      builder: (context) => const MpembayaranScreen(),
+                      settings: RouteSettings(
+                        arguments: {
+                          'bikeType': bikeType,
+                          'price': price,
+                          'jumlahJamSewa': jumlahJamSewa,
+                          'jamPengambilan': jamPengambilan,
+                          'jamPengembalian': jamPengembalian,
+                        },
+                      ),
+                    ),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.black, // Set warna teks menjadi hitam
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                child: const Text(
+                  'Konfirmasi Checkout',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 ),
-                child: Text("Metode Pembayaran"),
               ),
             ),
           ],
@@ -95,23 +89,48 @@ class CHrebiScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(String label, TextEditingController controller, {String suffixText = ""}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          label,
-          style: TextStyle(fontSize: 16),
-        ),
-        TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            suffixText: suffixText,
-            border: OutlineInputBorder(),
+  Widget _buildLabeledField(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '$label :',
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18, // Label lebih besar
+            ),
           ),
-          keyboardType: TextInputType.number,
-        ),
-      ],
+          const SizedBox(height: 6),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.1),
+                  blurRadius: 6,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: TextField(
+              readOnly: true,
+              decoration: InputDecoration(
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+              controller: TextEditingController(text: value),
+              style: const TextStyle(color: Colors.black),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

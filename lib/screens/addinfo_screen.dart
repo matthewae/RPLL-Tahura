@@ -8,7 +8,7 @@ class AddinfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
         elevation: 0,
         title: const Text(
           'Detail Kelola Informasi',
@@ -19,7 +19,7 @@ class AddinfoScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+      backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -30,7 +30,7 @@ class AddinfoScreen extends StatelessWidget {
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
             const SizedBox(height: 8),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
@@ -44,7 +44,7 @@ class AddinfoScreen extends StatelessWidget {
               style: TextStyle(fontSize: 16, color: Colors.white),
             ),
             const SizedBox(height: 8),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
@@ -60,7 +60,7 @@ class AddinfoScreen extends StatelessWidget {
             const SizedBox(height: 8),
             Row(
               children: [
-                Expanded(
+                const Expanded(
                   child: TextField(
                     decoration: InputDecoration(
                       filled: true,
@@ -90,7 +90,7 @@ class AddinfoScreen extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            MmpengelolaScreen()), // Gantilah dengan nama class screen tujuan
+                            const MmpengelolaScreen()), // Gantilah dengan nama class screen tujuan
                   );
                 },
                 style: ElevatedButton.styleFrom(

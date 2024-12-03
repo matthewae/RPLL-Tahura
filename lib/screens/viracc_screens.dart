@@ -3,7 +3,7 @@ import 'package:flutter/services.dart'; // Import untuk clipboard
 import 'epay_screen.dart'; // Import EpayScreen
 
 class ViraccScreen extends StatelessWidget {
-  const ViraccScreen({Key? key}) : super(key: key);
+  const ViraccScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +18,9 @@ class ViraccScreen extends StatelessWidget {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.only(right: 16.0),
+            padding: EdgeInsets.only(right: 16.0),
             child: CircleAvatar(
               backgroundImage: AssetImage('assets/likmi2.png'),
             ),
@@ -67,10 +67,10 @@ class ViraccScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: Text(
                             '556830891445223',
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -110,7 +110,7 @@ class ViraccScreen extends StatelessWidget {
                     end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(8),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.black26,
                       blurRadius: 4,
@@ -149,7 +149,7 @@ class ViraccScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black, // Warna teks hitam
+                      color: Colors.black, 
                     ),
                   ),
                 ),

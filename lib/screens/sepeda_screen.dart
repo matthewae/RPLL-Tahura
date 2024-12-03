@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'detailrebi_screen.dart'; // Make sure to import your DetailrebiScreen file
 
 class SepedaScreen extends StatelessWidget {
-  const SepedaScreen({Key? key}) : super(key: key);
+  const SepedaScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pemesanan Sepeda'),
+        title: const Text('Pemesanan Sepeda'),
         automaticallyImplyLeading: false, // This removes the default back button
       ),
       body: SingleChildScrollView(
@@ -16,8 +16,8 @@ class SepedaScreen extends StatelessWidget {
           children: [
             // First bike option: Sepeda Untuk Satu Orang
             Container(
-              margin: EdgeInsets.all(16.0),
-              padding: EdgeInsets.all(16.0),
+              margin: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.grey,
@@ -28,23 +28,23 @@ class SepedaScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Sepeda Untuk Satu Orang',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
                     ),
                   ),
-                  SizedBox(height: 8.0),
-                  Row(
+                  const SizedBox(height: 8.0),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Harga'),
                       Text('Rp...'),
                     ],
                   ),
-                  SizedBox(height: 8.0),
-                  Row(
+                  const SizedBox(height: 8.0),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Stock'),
@@ -57,15 +57,15 @@ class SepedaScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailrebiScreen(), // Navigate to DetailrebiScreen
+                          builder: (context) => const DetailrebiScreen(), // Navigate to DetailrebiScreen
                         ),
                       );
                     },
                     child: Container(
-                      margin: EdgeInsets.only(top: 10),
-                      padding: EdgeInsets.symmetric(vertical: 10),
+                      margin: const EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       color: Colors.blue,
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Pilih Sepeda',
                           style: TextStyle(color: Colors.white),
@@ -78,8 +78,8 @@ class SepedaScreen extends StatelessWidget {
             ),
             // Second bike option: Sepeda Untuk Dua Orang
             Container(
-              margin: EdgeInsets.all(16.0),
-              padding: EdgeInsets.all(16.0),
+              margin: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.grey,
@@ -90,23 +90,23 @@ class SepedaScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Sepeda Untuk Dua Orang',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16.0,
                     ),
                   ),
-                  SizedBox(height: 8.0),
-                  Row(
+                  const SizedBox(height: 8.0),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Harga'),
                       Text('Rp...'),
                     ],
                   ),
-                  SizedBox(height: 8.0),
-                  Row(
+                  const SizedBox(height: 8.0),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text('Stock'),
@@ -119,15 +119,15 @@ class SepedaScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => DetailrebiScreen(), // Navigate to DetailrebiScreen
+                          builder: (context) => const DetailrebiScreen(), // Navigate to DetailrebiScreen
                         ),
                       );
                     },
                     child: Container(
-                      margin: EdgeInsets.only(top: 10),
-                      padding: EdgeInsets.symmetric(vertical: 10),
+                      margin: const EdgeInsets.only(top: 10),
+                      padding: const EdgeInsets.symmetric(vertical: 10),
                       color: Colors.blue,
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Pilih Sepeda',
                           style: TextStyle(color: Colors.white),

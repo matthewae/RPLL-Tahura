@@ -81,14 +81,14 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                             fit: BoxFit.fill,
                           ),
                           const SizedBox(height: 10),
-                          Text(
+                          const Text(
                             'Tahura Explore Hub',
                             style: TextStyle(
                               fontSize: 28,
                               color: Colors.white, // Mengubah warna tulisan menjadi putih
                               fontFamily: 'Times New Roman',
                               fontWeight: FontWeight.bold,
-                              shadows: const [
+                              shadows: [
                                 Shadow(
                                   color: Colors.black45,
                                   blurRadius: 6,

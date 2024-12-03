@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'mainmenu_screen.dart'; // Import MainMenuScreen
 
 class EpayScreen extends StatelessWidget {
-  const EpayScreen({Key? key}) : super(key: key);
+  const EpayScreen({super.key});
 
   // Function to generate a random code for the bike pickup
   String generateRandomCode() {
     final random = Random();
     const characters = '0123456789';
-    return 'SBSE' +
-        List.generate(
-            6, (index) => characters[random.nextInt(characters.length)]).join();
+    return 'SBSE${List.generate(
+            6, (index) => characters[random.nextInt(characters.length)]).join()}';
   }
 
   @override
@@ -37,9 +36,9 @@ class EpayScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center, 
             crossAxisAlignment: CrossAxisAlignment.center, 
             children: [
-              Column(
+              const Column(
                 children: [
-                  const Text(
+                  Text(
                     'Metode Pembayaran',
                     style: TextStyle(
                       fontSize: 18,
@@ -47,8 +46,8 @@ class EpayScreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 5),
-                  const Text(
+                  SizedBox(height: 5),
+                  Text(
                     '(Menggunakan qris/e-money)',
                     style: TextStyle(
                       fontSize: 16,
@@ -86,7 +85,7 @@ class EpayScreen extends StatelessWidget {
                           Navigator.of(context).pop();
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+                          backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                         ),
                         child: const Text(
@@ -122,7 +121,7 @@ class EpayScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) =>  MainmenuScreen()), // Navigate to MainMenuScreen
+                    MaterialPageRoute(builder: (context) =>  const MainmenuScreen()), // Navigate to MainMenuScreen
                   );
                 },
                 style: ElevatedButton.styleFrom(

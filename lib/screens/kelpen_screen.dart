@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class KelpenScreen extends StatefulWidget {
-  const KelpenScreen({Key? key}) : super(key: key);
+  const KelpenScreen({super.key});
 
   @override
   _KelpenScreenState createState() => _KelpenScreenState();
@@ -43,9 +43,9 @@ class _KelpenScreenState extends State<KelpenScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+      backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+        backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),

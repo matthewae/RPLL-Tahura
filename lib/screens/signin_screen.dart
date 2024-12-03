@@ -12,8 +12,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const SigninScreen(),
+    return const MaterialApp(
+      home: SigninScreen(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -104,7 +104,7 @@ class _SigninPageState extends State<SigninScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(129, 212, 105, 1.000),
+      backgroundColor: const Color.fromRGBO(129, 212, 105, 1.000),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,

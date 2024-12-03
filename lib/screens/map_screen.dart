@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 
 class MapScreen extends StatefulWidget {
@@ -11,70 +10,17 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  LatLng? _currentLocation;
+  final LatLng _defaultLocation = LatLng(-6.899517, 107.622478); // Lokasi STMIK LIKMI
+  LatLng? _markerLocation; // Lokasi marker yang akan ditampilkan saat klik tombol
   late final MapController _mapController;
-  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
     _mapController = MapController();
-    _getCurrentLocation();
   }
 
-  /// Function to fetch the current location of the device
-  Future<void> _getCurrentLocation() async {
-    try {
-      // Check if location services are enabled
-      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) {
-        _showMessage('Layanan lokasi tidak aktif.');
-        return;
-      }
-
-      // Check and request location permissions
-      LocationPermission permission = await Geolocator.checkPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          _showMessage('Izin lokasi ditolak.');
-          return;
-        }
-      }
-
-      if (permission == LocationPermission.deniedForever) {
-        _showMessage(
-          'Izin lokasi ditolak permanen. Harap aktifkan di pengaturan.',
-        );
-        return;
-      }
-
-      // Fetch the current location of the device
-      final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
-      );
-
-      // Update the current location and loading state
-      setState(() {
-        _currentLocation = LatLng(position.latitude, position.longitude);
-        _isLoading = false;
-      });
-
-      print('Current location: ${position.latitude}, ${position.longitude}');
-    } catch (e) {
-      _showMessage('Gagal mendapatkan lokasi: $e');
-      setState(() {
-        _isLoading = false;
-      });
-    }
-  }
-
-  /// Function to display a snackbar message
-  void _showMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
-  }
-
-  /// Add markers to the map
+  /// Tambahkan marker untuk lokasi tertentu
   List<Marker> _addMarkers() {
     final spots = [
       {
@@ -84,19 +30,16 @@ class _MapScreenState extends State<MapScreen> {
       {"title": "Curug Omas", "position": LatLng(-6.8350332, 107.6581357)},
       {"title": "Goa Jepang", "position": LatLng(-6.856518, 107.632865)},
       {"title": "Goa Belanda", "position": LatLng(-6.854471, 107.637774)},
-      
-      {"title": "Jembatan Gantung", 
-      "position": LatLng(-6.8390, 107.6225)},
-      {"title": "Monumen Ir. H. Djuanda", 
-      "position": LatLng(-6.857481, 107.629433)},
-      
+      {"title": "Jembatan Gantung", "position": LatLng(-6.8390, 107.6225)},
+      {"title": "Monumen Ir. H. Djuanda", "position": LatLng(-6.857481, 107.629433)},
       {"title": "Batu Hoe", "position": LatLng(-6.839175, 107.647933)},
       {"title": "Batu Batik", "position": LatLng(-6.8422229, 107.6482683)},
       {"title": "Pintu Masuk Maribaya", "position": LatLng(-6.8311627, 107.6509174)},
     ];
 
-    if (_currentLocation != null) {
-      spots.add({"title": "Lokasi Saya", "position": _currentLocation!});
+    // Tambahkan marker lokasi saat ini (jika sudah diatur)
+    if (_markerLocation != null) {
+      spots.add({"title": "Lokasi Awal", "position": _markerLocation!});
     }
 
     return spots.map((spot) {
@@ -106,21 +49,19 @@ class _MapScreenState extends State<MapScreen> {
         point: spot["position"] as LatLng,
         builder: (ctx) => Icon(
           Icons.location_pin,
-          color: spot["title"] == "Lokasi Saya" ? Colors.blue : Colors.red,
+          color: spot["title"] == "Lokasi Awal" ? Colors.blue : Colors.red,
           size: 40.0,
         ),
       );
     }).toList();
   }
 
-  /// Move the map to the current location
-  void _moveToCurrentLocation() {
-    if (_currentLocation != null) {
-      _mapController.move(_currentLocation!, 17.0);
-      print('Moving to current location: $_currentLocation');
-    } else {
-      _showMessage('Lokasi belum tersedia.');
-    }
+  /// Pindahkan peta ke lokasi default dan tambahkan marker
+  void _moveToDefaultLocation() {
+    setState(() {
+      _markerLocation = _defaultLocation; // Atur lokasi marker
+    });
+    _mapController.move(_defaultLocation, 17.0); // Pindahkan peta ke lokasi default
   }
 
   @override
@@ -129,36 +70,27 @@ class _MapScreenState extends State<MapScreen> {
       appBar: AppBar(
         title: const Text('Map - Tahura'),
       ),
-      body: Stack(
+      body: FlutterMap(
+        mapController: _mapController,
+        options: MapOptions(
+          center: _defaultLocation, // Titik pusat awal peta
+          zoom: 17.0,
+          maxZoom: 18.0,
+          minZoom: 16.0,
+          interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
+        ),
         children: [
-          FlutterMap(
-            mapController: _mapController,
-            options: MapOptions(
-              center: _currentLocation ?? LatLng(-6.8955314, 107.6106696), // Default center
-              zoom: 17.0,
-              maxZoom: 18.0,
-              minZoom: 16.0,
-              interactiveFlags: InteractiveFlag.drag | InteractiveFlag.pinchZoom,
-            ),
-            children: [
-              TileLayer(
-                urlTemplate:
-                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                subdomains: const ['a', 'b', 'c'],
-              ),
-              MarkerLayer(markers: _addMarkers()),
-            ],
+          TileLayer(
+            urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            subdomains: const ['a', 'b', 'c'],
           ),
-          if (_isLoading)
-            const Center(
-              child: CircularProgressIndicator(),
-            ),
+          MarkerLayer(markers: _addMarkers()), // Tambahkan marker layer
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _moveToCurrentLocation,
+        onPressed: _moveToDefaultLocation,
         child: const Icon(Icons.my_location),
-        tooltip: 'Ke Lokasi Saya',
+        tooltip: 'Ke Lokasi Awal',
       ),
     );
   }
