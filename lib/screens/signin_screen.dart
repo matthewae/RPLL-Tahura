@@ -1,23 +1,9 @@
 import 'package:flutter/material.dart';
-import 'password_screen.dart';
+import '../globals/globals.dart';
+import 'profile_screen.dart'; // Tambahkan impor ini
+import 'password_screen.dart'; // Tambahkan impor ini
 import '../database/database_instance.dart';
 import '../models/pengguna.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: SigninScreen(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
-}
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -52,7 +38,6 @@ class _SigninPageState extends State<SigninScreen> {
     String password = _passwordController.text.trim();
     String confirmPassword = _confirmPasswordController.text.trim();
 
-    // Validation
     if (email.isEmpty || password.isEmpty || confirmPassword.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -75,18 +60,24 @@ class _SigninPageState extends State<SigninScreen> {
 
     try {
       Pengguna penggunaBaru = Pengguna(
-        username: email.split('@')[0],
+        username: email.split('@')[0], // Ambil bagian sebelum '@'
         email: email,
         password: password,
       );
 
       await DatabaseInstance.instance.insertPengguna(penggunaBaru);
+
+      // Simpan data login ke variabel global
+      loggedInEmail = penggunaBaru.email;
+      loggedInUsername = penggunaBaru.username;
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Akun Berhasil Dibuat!'),
           backgroundColor: Colors.green,
         ),
       );
+
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => PasswordScreen()),
@@ -111,7 +102,7 @@ class _SigninPageState extends State<SigninScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pop(context); // Navigate to the previous screen
+            Navigator.pop(context);
           },
         ),
         actions: const [
@@ -250,19 +241,6 @@ class _SigninPageState extends State<SigninScreen> {
                   ),
                 ],
               ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset('assets/tahura3.png', height: 40.0), // Logo 1
-                const SizedBox(width: 20.0),
-                Image.asset('assets/likmidn.png', height: 40.0), // Logo 2
-                const SizedBox(width: 20.0),
-                Image.asset('assets/turisbg.png', height: 40.0), // Logo 3
-              ],
             ),
           ),
         ],

@@ -4,7 +4,7 @@ import 'map_screen.dart';
 import 'flora_screen.dart';
 import 'fauna_screen.dart';
 import 'spot_screen.dart';
-import 'detailrebi_screen.dart'; // Import SepedaScreen
+import 'detailrebi_screen.dart';
 
 class MainmenuScreen extends StatefulWidget {
   const MainmenuScreen({super.key});
@@ -20,15 +20,16 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: true, // Mencegah overflow
       body: Stack(
         children: [
           Container(
-            color: Colors.green, // Warna latar belakang
+            color: Colors.green[300]!,
           ),
           Column(
             children: [
               AppBar(
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.green[300]!,
                 elevation: 0,
                 leading: IconButton(
                   icon: const Icon(Icons.account_circle, color: Colors.black),
@@ -53,121 +54,124 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
                 ),
               ),
               Expanded(
-                child: _selectedIndex == 0
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        child: Column(
-                          children: [
-                            const SizedBox(height: 20),
-                            for (var category in categories)
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 10.0),
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  elevation: 3, // Tambahkan bayangan pada card
-                                  child: InkWell(
-                                    onTap: () {
-                                      if (category == 'Flora') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const FloraScreen(),
-                                          ),
-                                        );
-                                      } else if (category == 'Fauna') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const FaunaScreen(),
-                                          ),
-                                        );
-                                      } else if (category == 'Spot') {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                const SpotScreen(),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    child: Row(
-                                      children: [
-                                        // Bagian gambar/icon
-                                        Container(
-                                          height: 80,
-                                          width: 80,
-                                          decoration: BoxDecoration(
-                                            borderRadius: const BorderRadius
-                                                    .only(
-                                                topLeft: Radius.circular(12),
-                                                bottomLeft: Radius.circular(12),
-                                              ),
-                                            image: DecorationImage(
-                                              image: AssetImage(
-                                                category == 'Flora'
-                                                    ? 'assets/pinus.jpg'
-                                                    : category == 'Fauna'
-                                                        ? 'assets/rusa.jpg'
-                                                        : 'assets/museum.jpg',
-                                              ),
-                                              fit: BoxFit.cover,
+                child: SingleChildScrollView( // Bungkus widget agar bisa di-scroll
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        if (_selectedIndex == 0)
+                          for (var category in categories)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 16.0),
+                              child: Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                elevation: 5,
+                                clipBehavior: Clip.antiAlias,
+                                child: InkWell(
+                                  onTap: () {
+                                    if (category == 'Flora') {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const FloraScreen(),
+                                        ),
+                                      );
+                                    } else if (category == 'Fauna') {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const FaunaScreen(),
+                                        ),
+                                      );
+                                    } else if (category == 'Spot') {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SpotScreen(),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        height: 150,
+                                        decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage(
+                                              category == 'Flora'
+                                                  ? 'assets/pinus.jpg'
+                                                  : category == 'Fauna'
+                                                      ? 'assets/rusa.jpg'
+                                                      : 'assets/museum.jpg',
                                             ),
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
-                                        // Bagian teks
-                                        Expanded(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  category,
-                                                  style: const TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 8),
-                                                Text(
-                                                  category == 'Flora'
-                                                      ? 'Explore flora collection in Tahura.'
-                                                      : category == 'Fauna'
-                                                          ? 'Discover various fauna species.'
-                                                          : 'Find your favorite spot.',
-                                                  style: const TextStyle(
-                                                    fontSize: 14,
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                              ],
+                                      ),
+                                      Container(
+                                        height: 150,
+                                        decoration: BoxDecoration(
+                                          gradient: LinearGradient(
+                                            colors: [
+                                              Colors.black.withOpacity(0.5),
+                                              Colors.transparent,
+                                            ],
+                                            begin: Alignment.bottomCenter,
+                                            end: Alignment.topCenter,
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        bottom: 16,
+                                        left: 16,
+                                        right: 16,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              category,
+                                              style: const TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white,
+                                              ),
                                             ),
-                                          ),
+                                            const SizedBox(height: 8),
+                                            Text(
+                                              category == 'Flora'
+                                                  ? 'Explore flora collection in Tahura.'
+                                                  : category == 'Fauna'
+                                                      ? 'Discover various fauna species.'
+                                                      : 'Find your favorite spot.',
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.white70,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                        // Ikon panah
-                                        const Padding(
-                                          padding: EdgeInsets.only(right: 8.0),
-                                          child: Icon(Icons.arrow_forward_ios,
-                                              size: 16),
-                                        ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                            const Spacer(),
-                          ],
-                        ),
-                      )
-                    : _selectedIndex == 1
-                        ? const MapScreen() // Halaman Map tetap
-                        : const DetailrebiScreen(), // Halaman Sepeda
+                            ),
+                        if (_selectedIndex == 1)
+                          const MapScreen()
+                        else if (_selectedIndex == 2)
+                          const DetailrebiScreen(),
+                      ],
+                    ),
+                  ),
+                ),
               ),
               BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,

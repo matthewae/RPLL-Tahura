@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'signin_screen.dart';
 import 'forgotpws_screen.dart';
 import 'mainmenu_screen.dart';
+import 'profile_screen.dart'; // Pastikan ProfileScreen diimport
 import '../database/database_instance.dart';
 import '../models/pengguna.dart';
+import '../globals/globals.dart'; // Import globals.dart
 
 class PasswordScreen extends StatelessWidget {
   PasswordScreen({super.key});
@@ -49,9 +51,17 @@ class PasswordScreen extends StatelessWidget {
           pengguna.email == email && pengguna.password == password);
 
       if (isValidUser) {
+        // Get the logged in user
+        Pengguna loggedInUser = penggunaList.firstWhere((pengguna) =>
+            pengguna.email == email && pengguna.password == password);
+
+        // Save the logged in user's username and email to globals
+        loggedInUsername = loggedInUser.username;
+        loggedInEmail = loggedInUser.email;
+
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const MainmenuScreen()),
+          MaterialPageRoute(builder: (context) =>  MainmenuScreen()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -248,7 +258,8 @@ class PasswordScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(16.0),
             borderSide: BorderSide.none,
           ),
-          contentPadding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+          contentPadding:
+              const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
           suffixIcon: suffixIcon,
         ),
       ),

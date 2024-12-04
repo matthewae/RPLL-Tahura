@@ -12,7 +12,8 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final LatLng _defaultLocation =
       LatLng(-6.8955201570034115, 107.61324386829472); // Lokasi STMIK LIKMI
-  LatLng? _markerLocation; // Lokasi marker yang akan ditampilkan saat klik tombol
+  LatLng?
+      _markerLocation; // Lokasi marker yang akan ditampilkan saat klik tombol
   late final MapController _mapController;
 
   double _currentZoom = 17.0; // Zoom awal
@@ -67,6 +68,7 @@ class _MapScreenState extends State<MapScreen> {
         "title": "Pintu Masuk Utama Tahura",
         "position": LatLng(-6.858293, 107.630616),
       },
+      {"title": "Kafe Tahura", "position": LatLng(-6.8588313,107.6303313)},
       {"title": "Curug Omas", "position": LatLng(-6.8350332, 107.6581357)},
       {"title": "Goa Jepang", "position": LatLng(-6.856518, 107.632865)},
       {"title": "Goa Belanda", "position": LatLng(-6.854471, 107.637774)},
@@ -81,6 +83,7 @@ class _MapScreenState extends State<MapScreen> {
         "title": "Pintu Masuk Maribaya",
         "position": LatLng(-6.8311627, 107.6509174),
       },
+      {"title": "Penangkaran Rusa", "position": LatLng(-6.8432395,107.6454515)},
     ];
 
     // Tambahkan marker lokasi saat ini (jika sudah diatur)
@@ -147,7 +150,7 @@ class _MapScreenState extends State<MapScreen> {
                 center: _defaultLocation, // Titik pusat awal peta
                 zoom: _currentZoom,
                 maxZoom: 18.0,
-                minZoom: 16.0,
+                minZoom: 5.0,
                 interactiveFlags:
                     InteractiveFlag.drag | InteractiveFlag.pinchZoom,
               ),
@@ -171,7 +174,7 @@ class _MapScreenState extends State<MapScreen> {
           if (_permissionGranted)
             Positioned(
               bottom: 20,
-              right: 20,
+              left: 20, // Pindahkan tombol ke sisi kiri
               child: Column(
                 children: [
                   FloatingActionButton(
