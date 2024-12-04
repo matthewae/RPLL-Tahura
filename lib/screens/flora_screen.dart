@@ -112,7 +112,10 @@ class FloraCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [Colors.green[100]!, Colors.green[300]!], // Gradient background
+            colors: [
+              Colors.green[100]!,
+              Colors.green[300]!
+            ], // Gradient background
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
