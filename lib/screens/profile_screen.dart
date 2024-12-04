@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../globals/globals.dart';
+import 'password_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -9,8 +10,11 @@ class ProfileScreen extends StatelessWidget {
     loggedInUsername = null;
     loggedInEmail = null;
 
-    // Navigasi kembali ke LoginScreen
-    Navigator.pushReplacementNamed(context, '/login');
+    // Navigasi ke PasswordScreen
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => PasswordScreen()),
+    );
   }
 
   @override
@@ -88,8 +92,8 @@ class ProfileScreen extends StatelessWidget {
               onPressed: () => logout(context),
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 100, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 100, vertical: 15),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
