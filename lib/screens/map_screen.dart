@@ -12,16 +12,52 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final LatLng _defaultLocation =
       LatLng(-6.8955201570034115, 107.61324386829472); // Lokasi STMIK LIKMI
-  LatLng?
-      _markerLocation; // Lokasi marker yang akan ditampilkan saat klik tombol
+  LatLng? _markerLocation; // Lokasi marker yang akan ditampilkan saat klik tombol
   late final MapController _mapController;
 
   double _currentZoom = 17.0; // Zoom awal
+  bool _permissionGranted = false; // Dummy untuk izin GPS
 
   @override
   void initState() {
     super.initState();
     _mapController = MapController();
+    _showPermissionDialog(); // Tampilkan dialog izin GPS saat layar dibuka
+  }
+
+  /// Menampilkan dialog izin GPS
+  void _showPermissionDialog() {
+    Future.delayed(Duration.zero, () {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Izin GPS"),
+            content: const Text(
+                "Aplikasi membutuhkan izin untuk mengakses lokasi perangkat Anda. Izinkan?"),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  _permissionGranted = false; // Izin ditolak
+                },
+                child: const Text("Tolak"),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  setState(() {
+                    _permissionGranted = true; // Izin diterima
+                  });
+                },
+                child: const Text("Izinkan"),
+              ),
+            ],
+          );
+        },
+      );
+    });
   }
 
   /// Tambahkan marker untuk lokasi tertentu
@@ -104,54 +140,66 @@ class _MapScreenState extends State<MapScreen> {
       ),
       body: Stack(
         children: [
-          FlutterMap(
-            mapController: _mapController,
-            options: MapOptions(
-              center: _defaultLocation, // Titik pusat awal peta
-              zoom: _currentZoom,
-              maxZoom: 18.0,
-              minZoom: 16.0,
-              interactiveFlags:
-                  InteractiveFlag.drag | InteractiveFlag.pinchZoom,
-            ),
-            children: [
-              TileLayer(
-                urlTemplate:
-                    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                subdomains: const ['a', 'b', 'c'],
+          if (_permissionGranted)
+            FlutterMap(
+              mapController: _mapController,
+              options: MapOptions(
+                center: _defaultLocation, // Titik pusat awal peta
+                zoom: _currentZoom,
+                maxZoom: 18.0,
+                minZoom: 16.0,
+                interactiveFlags:
+                    InteractiveFlag.drag | InteractiveFlag.pinchZoom,
               ),
-              MarkerLayer(markers: _addMarkers()), // Tambahkan marker layer
-            ],
-          ),
-          Positioned(
-            bottom: 20,
-            right: 20,
-            child: Column(
               children: [
-                FloatingActionButton(
-                  heroTag: 'zoom_in_button', // Hero tag unik
-                  onPressed: _zoomIn,
-                  child: const Icon(Icons.zoom_in),
-                  tooltip: 'Zoom In',
+                TileLayer(
+                  urlTemplate:
+                      "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                  subdomains: const ['a', 'b', 'c'],
                 ),
-                const SizedBox(height: 10),
-                FloatingActionButton(
-                  heroTag: 'zoom_out_button', // Hero tag unik
-                  onPressed: _zoomOut,
-                  child: const Icon(Icons.zoom_out),
-                  tooltip: 'Zoom Out',
-                ),
+                MarkerLayer(markers: _addMarkers()), // Tambahkan marker layer
               ],
+            )
+          else
+            const Center(
+              child: Text(
+                "Izin GPS tidak diberikan. Peta tidak dapat ditampilkan.",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16),
+              ),
             ),
-          ),
+          if (_permissionGranted)
+            Positioned(
+              bottom: 20,
+              right: 20,
+              child: Column(
+                children: [
+                  FloatingActionButton(
+                    heroTag: 'zoom_in_button', // Hero tag unik
+                    onPressed: _zoomIn,
+                    tooltip: 'Zoom In',
+                    child: const Icon(Icons.zoom_in),
+                  ),
+                  const SizedBox(height: 10),
+                  FloatingActionButton(
+                    heroTag: 'zoom_out_button', // Hero tag unik
+                    onPressed: _zoomOut,
+                    tooltip: 'Zoom Out',
+                    child: const Icon(Icons.zoom_out),
+                  ),
+                ],
+              ),
+            ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        heroTag: 'move_to_default', // Hero tag unik
-        onPressed: _moveToDefaultLocation,
-        child: const Icon(Icons.my_location),
-        tooltip: 'Ke Lokasi Awal',
-      ),
+      floatingActionButton: _permissionGranted
+          ? FloatingActionButton(
+              heroTag: 'move_to_default', // Hero tag unik
+              onPressed: _moveToDefaultLocation,
+              tooltip: 'Ke Lokasi Awal',
+              child: const Icon(Icons.my_location),
+            )
+          : null,
     );
   }
 }

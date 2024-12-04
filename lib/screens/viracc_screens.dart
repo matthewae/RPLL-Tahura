@@ -105,7 +105,7 @@ class ViraccScreen extends StatelessWidget {
                 height: 48,
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Colors.green, Colors.lightGreen],
+                    colors: [Color.fromARGB(255, 237, 241, 238), Color.fromARGB(255, 255, 255, 255)],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),

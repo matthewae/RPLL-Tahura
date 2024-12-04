@@ -39,7 +39,7 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color.fromRGBO(129, 212, 105, 1.000), Color.fromRGBO(78, 162, 63, 1.000)],
             begin: Alignment.topLeft,
