@@ -20,12 +20,14 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true, // Mencegah overflow
+      resizeToAvoidBottomInset: true,
       body: Stack(
         children: [
+          // Background Container
           Container(
             color: Colors.green[300]!,
           ),
+          // Main Content
           Column(
             children: [
               AppBar(
@@ -53,14 +55,15 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
                   ),
                 ),
               ),
-              Expanded(
-                child: SingleChildScrollView( // Bungkus widget agar bisa di-scroll
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 20),
-                        if (_selectedIndex == 0)
+              // Only show content when Info tab is selected
+              if (_selectedIndex == 0)
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 20),
                           for (var category in categories)
                             Padding(
                               padding: const EdgeInsets.only(bottom: 16.0),
@@ -164,43 +167,55 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
                                 ),
                               ),
                             ),
-                        if (_selectedIndex == 1)
-                          const MapScreen()
-                        else if (_selectedIndex == 2)
-                          const DetailrebiScreen(),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                backgroundColor: Colors.white,
-                currentIndex: _selectedIndex,
-                onTap: (index) {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
-                items: [
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.info_outline,
-                        color: _selectedIndex == 0 ? Colors.blue : Colors.black),
-                    label: 'Info',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.map,
-                        color: _selectedIndex == 1 ? Colors.blue : Colors.black),
-                    label: 'Map',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: Icon(Icons.directions_bike,
-                        color: _selectedIndex == 2 ? Colors.blue : Colors.black),
-                    label: 'ReBi',
-                  ),
-                ],
-              ),
             ],
+          ),
+          // MapScreen and DetailrebiScreen
+          if (_selectedIndex == 1)
+            Positioned.fill(
+              child: const MapScreen(), // Display MapScreen when selected
+            ),
+          if (_selectedIndex == 2)
+            Positioned.fill(
+              child:
+                  const DetailrebiScreen(), // Display DetailrebiScreen when selected
+            ),
+          // Bottom Navigation Bar
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: Colors.white,
+              currentIndex: _selectedIndex,
+              onTap: (index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.info_outline,
+                      color: _selectedIndex == 0 ? Colors.blue : Colors.black),
+                  label: 'Info',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.map,
+                      color: _selectedIndex == 1 ? Colors.blue : Colors.black),
+                  label: 'Map',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.directions_bike,
+                      color: _selectedIndex == 2 ? Colors.blue : Colors.black),
+                  label: 'ReBi',
+                ),
+              ],
+            ),
           ),
         ],
       ),
