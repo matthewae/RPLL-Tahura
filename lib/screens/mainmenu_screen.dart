@@ -176,13 +176,13 @@ class _MainmenuScreenState extends State<MainmenuScreen> {
           ),
           // MapScreen and DetailrebiScreen
           if (_selectedIndex == 1)
-            Positioned.fill(
-              child: const MapScreen(), // Display MapScreen when selected
+            const Positioned.fill(
+              child: MapScreen(), // Display MapScreen when selected
             ),
           if (_selectedIndex == 2)
-            Positioned.fill(
+            const Positioned.fill(
               child:
-                  const DetailrebiScreen(), // Display DetailrebiScreen when selected
+                  DetailrebiScreen(), // Display DetailrebiScreen when selected
             ),
           // Bottom Navigation Bar
           Positioned(

@@ -10,8 +10,7 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
-  final LatLng _defaultLocation =
-      LatLng(-6.8955201570034115, 107.61324386829472); // Lokasi STMIK LIKMI
+  final LatLng _defaultLocation = LatLng(-6.8955201570034115, 107.61324386829472); // Lokasi STMIK LIKMI
   LatLng? _markerLocation; // Lokasi marker yang ditampilkan
   late final MapController _mapController;
 
@@ -134,69 +133,74 @@ class _MapScreenState extends State<MapScreen> {
       appBar: AppBar(
         title: const Text('Map - Tahura'),
       ),
-      body: Stack(
-        fit: StackFit.expand, // Ensure the Stack fills the entire screen
-        children: [
-          if (_permissionGranted)
-            Positioned.fill( // Ensure the map fills the entire screen
-              child: FlutterMap(
-                mapController: _mapController,
-                options: MapOptions(
-                  center: _defaultLocation,
-                  zoom: _currentZoom,
-                  maxZoom: 18.0,
-                  minZoom: 5.0,
-                  interactiveFlags: InteractiveFlag.all,
+      body: SafeArea(
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            if (_permissionGranted)
+              Positioned.fill(
+                child: FlutterMap(
+                  mapController: _mapController,
+                  options: MapOptions(
+                    center: _defaultLocation,
+                    zoom: _currentZoom,
+                    maxZoom: 18.0,
+                    minZoom: 5.0,
+                    interactiveFlags: InteractiveFlag.all,
+                  ),
+                  children: [
+                    TileLayer(
+                      urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                      subdomains: const ['a', 'b', 'c'],
+                    ),
+                    MarkerLayer(markers: _addMarkers()),
+                  ],
                 ),
-                children: [
-                  TileLayer(
-                    urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                    subdomains: const ['a', 'b', 'c'],
-                  ),
-                  MarkerLayer(markers: _addMarkers()),
-                ],
+              )
+            else
+              const Center(
+                child: Text(
+                  "Izin GPS tidak diberikan. Peta tidak dapat ditampilkan.",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
-            )
-          else
-            const Center(
-              child: Text(
-                "Izin GPS tidak diberikan. Peta tidak dapat ditampilkan.",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16),
+            if (_permissionGranted)
+              Positioned(
+                bottom: 140, // Sesuaikan dengan posisi tombol lain
+                left: 20,
+                child: Column(
+                  children: [
+                    FloatingActionButton(
+                      heroTag: 'zoom_in_button',
+                      onPressed: _zoomIn,
+                      tooltip: 'Zoom In',
+                      child: const Icon(Icons.zoom_in),
+                    ),
+                    const SizedBox(height: 10),
+                    FloatingActionButton(
+                      heroTag: 'zoom_out_button',
+                      onPressed: _zoomOut,
+                      tooltip: 'Zoom Out',
+                      child: const Icon(Icons.zoom_out),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          if (_permissionGranted)
-            Positioned(
-              bottom: 20,
-              left: 20,
-              child: Column(
-                children: [
-                  FloatingActionButton(
-                    heroTag: 'zoom_in_button',
-                    onPressed: _zoomIn,
-                    tooltip: 'Zoom In',
-                    child: const Icon(Icons.zoom_in),
-                  ),
-                  const SizedBox(height: 10),
-                  FloatingActionButton(
-                    heroTag: 'zoom_out_button',
-                    onPressed: _zoomOut,
-                    tooltip: 'Zoom Out',
-                    child: const Icon(Icons.zoom_out),
-                  ),
-                ],
+            if (_permissionGranted)
+              Positioned(
+                bottom: 140, // Sesuaikan dengan posisi tombol zoom
+                right: 20,
+                child: FloatingActionButton(
+                  heroTag: 'move_to_default',
+                  onPressed: _moveToDefaultLocation,
+                  tooltip: 'Ke Lokasi Awal',
+                  child: const Icon(Icons.my_location),
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
-      floatingActionButton: _permissionGranted
-          ? FloatingActionButton(
-              heroTag: 'move_to_default',
-              onPressed: _moveToDefaultLocation,
-              tooltip: 'Ke Lokasi Awal',
-              child: const Icon(Icons.my_location),
-            )
-          : null,
     );
   }
 }

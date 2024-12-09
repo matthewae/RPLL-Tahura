@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-// Import halaman EditMapsScreen, EditInfoScreen, PradminScreen, dan KelrebiScreen
-import 'editmaps_screen.dart';
+// Import halaman EditInfoScreen, PradminScreen, dan KelrebiScreen
 import 'editinfo_screen.dart';
 import 'pradmin_screen.dart';
 import 'kelrebi_screen.dart';
@@ -14,30 +13,29 @@ class MmpengelolaScreen extends StatefulWidget {
 }
 
 class _MmpengelolaScreenState extends State<MmpengelolaScreen> {
-  int _selectedIndex = 1; // Indeks default ke tab "Map"
+  int _selectedIndex = 0; // Indeks default ke tab "Info"
 
   // Fungsi untuk menangani perubahan tab
   void _onItemTapped(int index) {
-    if (index == 0) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const EditinfoScreen()),
-      );
-    } else if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const KelrebiScreen()),
-      );
-    } else if (index == 3) {
-      // Navigasi ke KelpenScreen ketika tab User di kanan bawah diklik
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const KelpenScreen()),
-      );
-    } else {
-      setState(() {
-        _selectedIndex = index;
-      });
+    switch (index) {
+      case 0:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const EditinfoScreen()),
+        );
+        break;
+      case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const KelrebiScreen()),
+        );
+        break;
+      case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const KelpenScreen()),
+        );
+        break;
     }
   }
 
@@ -66,32 +64,16 @@ class _MmpengelolaScreenState extends State<MmpengelolaScreen> {
           ),
         ),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add, color: Colors.black),
-            onPressed: () {
-              // Navigasi ke halaman EditMapsScreen
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const EditmapsScreen()),
-              );
-            },
-          ),
-        ],
       ),
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: [
-          const Center(child: Text("Info Screen")), // Placeholder untuk halaman Info
-          Center(
-            child: Image.asset(
-              'assets/tahura_map.png',
-              fit: BoxFit.cover,
-            ),
+      body: Center(
+        child: const Text(
+          "Selamat Datang di TAHURA Explore Hub",
+          style: TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.bold,
           ),
-          const Center(child: Text("ReBi Screen")), // Placeholder untuk halaman ReBi
-          const Center(child: Text("User Screen")), // Placeholder untuk halaman User
-        ],
+          textAlign: TextAlign.center,
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
@@ -100,15 +82,16 @@ class _MmpengelolaScreenState extends State<MmpengelolaScreen> {
         showSelectedLabels: true,
         showUnselectedLabels: true,
         currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        onTap: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+          _onItemTapped(index);
+        },
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.info_outline),
             label: 'Info',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.map),
-            label: 'Map',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.directions_bike),

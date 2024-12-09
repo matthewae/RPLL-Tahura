@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import '../globals/globals.dart';
-import 'profile_screen.dart'; // Tambahkan impor ini
-import 'password_screen.dart'; // Tambahkan impor ini
 import '../database/database_instance.dart';
 import '../models/pengguna.dart';
+import 'password_screen.dart';
+import 'adminlogin_screen.dart'; // Import halaman AdminloginScreen
 
 class SigninScreen extends StatefulWidget {
   const SigninScreen({super.key});
@@ -60,14 +60,13 @@ class _SigninPageState extends State<SigninScreen> {
 
     try {
       Pengguna penggunaBaru = Pengguna(
-        username: email.split('@')[0], // Ambil bagian sebelum '@'
+        username: email.split('@')[0],
         email: email,
         password: password,
       );
 
       await DatabaseInstance.instance.insertPengguna(penggunaBaru);
 
-      // Simpan data login ke variabel global
       loggedInEmail = penggunaBaru.email;
       loggedInUsername = penggunaBaru.username;
 
@@ -240,6 +239,26 @@ class _SigninPageState extends State<SigninScreen> {
                     ),
                   ),
                 ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 24.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AdminloginScreen()),
+                );
+              },
+              child: const Text(
+                'Admin Only',
+                style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),

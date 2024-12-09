@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'signin_screen.dart';
 import 'forgotpws_screen.dart';
 import 'mainmenu_screen.dart';
-import 'profile_screen.dart'; // Pastikan ProfileScreen diimport
+// Pastikan ProfileScreen diimport
 import '../database/database_instance.dart';
 import '../models/pengguna.dart';
 import '../globals/globals.dart'; // Import globals.dart
@@ -61,7 +61,7 @@ class PasswordScreen extends StatelessWidget {
 
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) =>  MainmenuScreen()),
+          MaterialPageRoute(builder: (context) =>  const MainmenuScreen()),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

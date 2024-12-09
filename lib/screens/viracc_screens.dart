@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // Import untuk clipboard
+import 'profile_screen.dart'; // Import ProfileScreen
 import 'epay_screen.dart'; // Import EpayScreen
+import 'package:flutter/services.dart'; // Untuk clipboard
 
 class ViraccScreen extends StatelessWidget {
   const ViraccScreen({super.key});
@@ -18,12 +19,18 @@ class ViraccScreen extends StatelessWidget {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 16.0),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/likmi2.png'),
-            ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.person,
+                size: 30), // Ganti avatar dengan icon profil
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfileScreen(),
+                ),
+              );
+            },
           ),
         ],
       ),
@@ -105,7 +112,10 @@ class ViraccScreen extends StatelessWidget {
                 height: 48,
                 decoration: BoxDecoration(
                   gradient: const LinearGradient(
-                    colors: [Color.fromARGB(255, 237, 241, 238), Color.fromARGB(255, 255, 255, 255)],
+                    colors: [
+                      Color.fromARGB(255, 237, 241, 238),
+                      Color.fromARGB(255, 255, 255, 255)
+                    ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -138,7 +148,8 @@ class ViraccScreen extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent, // Transparan untuk gradien
+                    backgroundColor:
+                        Colors.transparent, // Transparan untuk gradien
                     shadowColor: Colors.transparent,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -149,7 +160,7 @@ class ViraccScreen extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black, 
+                      color: Colors.black,
                     ),
                   ),
                 ),

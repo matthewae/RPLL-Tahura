@@ -9,7 +9,8 @@ class MainScreen extends StatefulWidget {
   MainScreenState createState() => MainScreenState();
 }
 
-class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMixin {
+class MainScreenState extends State<MainScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _fadeInAnimation;
 
@@ -41,7 +42,10 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color.fromRGBO(129, 212, 105, 1.000), Color.fromRGBO(78, 162, 63, 1.000)],
+            colors: [
+              Color.fromRGBO(129, 212, 105, 1.000),
+              Color.fromRGBO(78, 162, 63, 1.000)
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -87,11 +91,12 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
                         _buildButton(
                           context,
                           'Login',
-                          Colors.blueAccent,
+                          const Color.fromRGBO(105, 240, 174, 1),
                           () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => PasswordScreen()),
+                              MaterialPageRoute(
+                                  builder: (context) => PasswordScreen()),
                             );
                           },
                           Colors.black, // Teks warna hitam
@@ -101,11 +106,12 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
                         _buildButton(
                           context,
                           'Sign Up',
-                          Colors.greenAccent,
+                          const Color.fromRGBO(105, 240, 174, 1),
                           () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => const SigninScreen()),
+                              MaterialPageRoute(
+                                  builder: (context) => const SigninScreen()),
                             );
                           },
                           Colors.black, // Teks warna hitam
@@ -122,7 +128,8 @@ class MainScreenState extends State<MainScreen> with SingleTickerProviderStateMi
     );
   }
 
-  Widget _buildButton(BuildContext context, String label, Color color, VoidCallback onPressed, Color textColor) {
+  Widget _buildButton(BuildContext context, String label, Color color,
+      VoidCallback onPressed, Color textColor) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),

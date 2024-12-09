@@ -3,7 +3,7 @@ import '../globals/globals.dart';
 import 'password_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({super.key});
 
   void logout(BuildContext context) {
     // Hapus data pengguna dari variabel global
